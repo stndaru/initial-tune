@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnrcjxns67w0s"]
+
+[ext_resource type="PackedScene" uid="uid://b74v8vsr3880x" path="res://scenes/car/Car.tscn" id="1_mpk4d"]
+[ext_resource type="Texture2D" uid="uid://bnpnd8gkdquvk" path="res://assets/grid.png" id="1_mx1on"]
+
+[node name="Race" type="Node"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(464, 406)
+scale = Vector2(10, 10)
+texture = ExtResource("1_mx1on")
+
+[node name="Node2D" parent="." instance=ExtResource("1_mpk4d")]
+position = Vector2(215, 147)
