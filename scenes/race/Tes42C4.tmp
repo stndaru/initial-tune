@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnrcjxns67w0s"]
+
+[ext_resource type="Texture2D" uid="uid://bnpnd8gkdquvk" path="res://assets/grid.png" id="1_1kcin"]
+[ext_resource type="PackedScene" uid="uid://b74v8vsr3880x" path="res://scenes/car/Car.tscn" id="2_nvm56"]
+
+[node name="TestBed" type="Node"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(464, 406)
+scale = Vector2(10, 10)
+texture = ExtResource("1_1kcin")
+
+[node name="Node2D" parent="." instance=ExtResource("2_nvm56")]
+position = Vector2(215, 147)
