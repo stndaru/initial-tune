@@ -36,12 +36,14 @@ script = ExtResource("2_u10ec")
 
 [node name="HeadLampLeft" type="PointLight2D" parent="CarBody/FrontLamp"]
 rotation = -3.14159
-color = Color(1, 0.627451, 0.152941, 1)
+color = Color(1, 0.686275, 0.0941176, 1)
+energy = 1.2
 texture = ExtResource("2_cb44l")
 
 [node name="HeadLampRight" type="PointLight2D" parent="CarBody/FrontLamp"]
 rotation = -3.14159
-color = Color(1, 0.627451, 0.152941, 1)
+color = Color(1, 0.686275, 0.0941176, 1)
+energy = 1.2
 texture = ExtResource("2_cb44l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CarBody"]
