@@ -31,8 +31,8 @@ var friction = -0.9
 var drag = -0.0015
 
 # Reverse and Brake
-var braking = -450
-var max_speed_reverse = 250
+var brake_power = -450
+var max_speed_reverse = 2500
 
 # Traction
 var slip_speed = 700  # Speed where traction is reduced
@@ -46,7 +46,7 @@ func _ready():
 	wheel_base = get_node("CollisionShape2D").get_shape().get_height() - (get_node("CollisionShape2D").get_shape().get_height() * 0.15)
 
 func _physics_process(delta):
-	print(0)
+	print(torque)
 	acceleration = Vector2.ZERO
 	get_input()
 	apply_friction()
@@ -76,9 +76,13 @@ func get_input():
 		steer_angle = move_toward(steer_angle, 0, steer_decay)
 		turn = move_toward(turn, 0, steer_decay)
 		
+	# gas currently useless :/ - it affects torque and accel, but not felt much
+	# maybe the rpm not smooth enough? I think need to implement the axis for gas
 	if Input.is_action_pressed("ui_up"):
 		gas += gas_rate
-		rpm = clamp(lerpf(rpm, rpm+gas, rpm_delay), 0, max_rpm)
+		rpm = clamp(
+			lerpf(rpm, rpm+gas, rpm_delay)
+			, 0, max_rpm)
 	else:
 		gas = move_toward(gas, 0, gas_rate)
 		rpm = move_toward(rpm, 0, rpm_decay)
@@ -88,7 +92,7 @@ func get_input():
 	acceleration = transform.x * torque
 	
 	if Input.is_action_pressed("ui_down"):
-		acceleration = transform.x * braking
+		acceleration = transform.x * brake_power
 
 
 func calculate_steering(delta):
