@@ -11,12 +11,12 @@ var steer_angle = 0
 var steer_decay = 0.7
 
 # Car Manueverability Data
-var wheel_base = 70  # Distance from front to rear wheel
+var wheel_base = 70  # Distance from front to rear wheel, default 70
 var steering_angle = 15  # Amount that front wheel turns, in degrees
 var weight = 1.2 # Car Weight
 
 # Car Engine Data
-var engine_power = 300  # Forward acceleration force.
+var engine_power = 500  # Forward acceleration force.
 var acceleration = Vector2.ZERO
 
 # Engine Property
@@ -42,8 +42,11 @@ var traction_slow = 0.7  # Low-speed traction
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _ready():
+	wheel_base = get_node("CollisionShape2D").get_shape().get_height() - (get_node("CollisionShape2D").get_shape().get_height() * 0.15)
+
 func _physics_process(delta):
-	print(rpm)
+	print(0)
 	acceleration = Vector2.ZERO
 	get_input()
 	apply_friction()

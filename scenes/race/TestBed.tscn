@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnrcjxns67w0s"]
+[gd_scene load_steps=6 format=3 uid="uid://bnrcjxns67w0s"]
 
 [ext_resource type="Texture2D" uid="uid://bnpnd8gkdquvk" path="res://assets/grid.png" id="1_1kcin"]
 [ext_resource type="PackedScene" uid="uid://b74v8vsr3880x" path="res://scenes/car/Car.tscn" id="2_nvm56"]
+[ext_resource type="Texture2D" uid="uid://5nfqpvxc4xmr" path="res://assets/lamp_post_vertical.png" id="3_gti5y"]
+[ext_resource type="Texture2D" uid="uid://ci8lxw7l8wosv" path="res://assets/2d_lights_and_shadows_neutral_point_light.webp" id="4_hrxj3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c10b1"]
+radius = 26.0768
 
 [node name="TestBed" type="Node"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.25098, 0.25098, 0.25098, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(464, 406)
@@ -11,4 +19,20 @@ scale = Vector2(10, 10)
 texture = ExtResource("1_1kcin")
 
 [node name="Node2D" parent="." instance=ExtResource("2_nvm56")]
-position = Vector2(215, 147)
+position = Vector2(200, 144)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(381, -66)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_c10b1")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(0.365, 0.365)
+texture = ExtResource("3_gti5y")
+
+[node name="PointLight2D" type="PointLight2D" parent="StaticBody2D"]
+color = Color(1, 0.662745, 0, 1)
+energy = 0.64
+texture = ExtResource("4_hrxj3")
+texture_scale = 1.57
