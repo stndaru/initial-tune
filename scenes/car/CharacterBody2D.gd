@@ -4,13 +4,16 @@ extends CharacterBody2D
 var turn = 0 # Rate at which steer angle increases
 var turn_rate = 0.5 # Rate of change for turn
 var gas = 0 # Rate at which rpm increases
-var gas_rate = 0.5 # Rate of change for gas
+var gas_rate = 0.2 # Rate of change for gas
 var debugs = Vector2.ZERO
 
 # Gearing
 var gear = 0
 var gear_index = 1
-var gear_shift = ["R" ,0 ,1 ,2 ,3 ,4 ,5]
+var gear_shift = ["R" ,"N" ,1 ,2 ,3 ,4 ,5]
+var gear_ratio = [-0.3, 0, 0.4, 0.5, 0.7, 0.9, 1]
+var gear_limit = [[0,-0], [0,0], \
+					[0, 0], [0,0], [0,0], [0,0], [0,0]]
 
 # Steering Property
 var steer_angle = 0
@@ -18,17 +21,22 @@ var steer_decay = 0.7
 
 # Car Manueverability Data
 var wheel_base = 70  # Distance from front to rear wheel, default 70
-var steering_angle = 15  # Amount that front wheel turns, in degrees
+var steering_angle = 45  # Amount that front wheel turns, in degrees
+var steering_weight = 0
 var weight = 1.2 # Car Weight
+var rear_wheel = Vector2.ZERO
+var front_wheel = Vector2.ZERO
+var new_heading = Vector2.ZERO
+var new_heading_dot = Vector2.ZERO
 
 # Car Engine Data
-var engine_power = 500  # Forward acceleration force.
+var engine_power = 450  # Forward acceleration force.
 var acceleration = Vector2.ZERO
 
 # Engine Property
 var rpm = 0
 var max_rpm = 7
-var rpm_decay = 0.5
+var rpm_decay = 50
 var rpm_delay = 0.8 # Delay of rpm following gas input
 var torque = 0
 
@@ -44,7 +52,8 @@ var brake_power = -2.5
 var max_speed_reverse = 2500
 
 # Traction
-var slip_speed = 700  # Speed where traction is reduced
+var traction = 0
+var slip_speed = 1200  # Speed where traction is reduced
 var traction_fast = 0.1  # High-speed traction
 var traction_slow = 0.7  # Low-speed traction
 
@@ -53,6 +62,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	wheel_base = get_node("CollisionShape2D").get_shape().get_height() - (get_node("CollisionShape2D").get_shape().get_height() * 0.15)
+	gear = gear_shift[gear_index]
+	rear_wheel = position - transform.x * wheel_base / 2.0
+	front_wheel = position + transform.x * wheel_base / 2.0
+	new_heading = (front_wheel - rear_wheel).normalized()
+	traction = traction_slow
+	new_heading_dot = new_heading.dot(velocity.normalized())
+	
 
 func _input(event):
 	if event.is_action_pressed("ui_shift_up") || event.is_action_pressed("ui_shift_down"):
@@ -63,11 +79,15 @@ func _input(event):
 		process_gear()
 
 func _physics_process(delta):
-	print("TORQUE:", torque, \
+	print("TORQUE:", snapped(torque, 0.01), \
 			" RPM:", snapped(rpm, 0.01), " SPEED:", snapped(velocity.length(),0.01), \
 			" GEAR:", gear, \
 			" || ", \
-			" INTPLT:", debugs) #, \
+			#" INTPLT:", debugs, \
+			#" GAS:", gas, \
+			#" GEARODX:", gear_index, \
+			" NEWHEAD:", snapped(new_heading, 0.01), \
+			" NEWHEADD:", snapped(new_heading_dot, 0.01) )
 			#" ACC:", snapped(acceleration.length(), 0.01), \
 			#" CTR:", snapped(counter_force.length(), 0.01), \
 			#" FR:", snapped(friction_force.length(), 0.01), \
@@ -101,6 +121,8 @@ func get_input():
 			if turn > 0:
 				turn = 0
 			turn -= turn_rate
+		# TODO Implement steering weight at velocity to reduce turn rate
+		steering_weight = velocity.length()/100
 		steer_angle = clamp(steer_angle + turn, -steering_angle, steering_angle)
 	else:
 		steer_angle = move_toward(steer_angle, 0, steer_decay)
@@ -108,17 +130,14 @@ func get_input():
 		
 	if Input.is_action_pressed("ui_up"):
 		gas = clamp(gas + gas_rate, 0, max_rpm)
-		debugs = debugs.bezier_interpolate(Vector2(0.58, 0.28), Vector2(0.41, 0.86), velocity, 1)
-		#rpm = clamp(
-			#lerpf(rpm, rpm+gas, rpm_delay)
-			#, 0, max_rpm)
+		rpm = _cubic_bezier(Vector2(0,0), Vector2(0.64,0.24), Vector2(0.62,0.97), \
+						Vector2(1,1), gas/7).y * 7000
 	else:
 		gas = move_toward(gas, 0, gas_rate)
-		#rpm = move_toward(rpm, 0, rpm_decay)
+		rpm = move_toward(rpm, 0, rpm_decay)
 	
 	# transform.x is direction of force horizontally (going forward)
-	torque = gas * engine_power
-	rpm = velocity.length()
+	torque = gas * (rpm/7000) * (engine_power*gear_ratio[gear_index])
 	acceleration = transform.x * torque
 	
 	if Input.is_action_pressed("ui_down"):
@@ -126,26 +145,28 @@ func get_input():
 
 func process_gear():
 	gear = gear_shift[gear_index]
+	# TODO Set RPM downshift based on final drive ratio
+	#rpm = 
 
 func calculate_steering(delta):
 	# Set the Wheel Positions
-	var rear_wheel = position - transform.x * wheel_base / 2.0
-	var front_wheel = position + transform.x * wheel_base / 2.0
+	rear_wheel = position - transform.x * wheel_base / 2.0
+	front_wheel = position + transform.x * wheel_base / 2.0
 	
 	rear_wheel += velocity * delta
 	front_wheel += velocity.rotated(deg_to_rad(steer_angle)) * delta
 	
-	var new_heading = (front_wheel - rear_wheel).normalized()
-	var traction = traction_slow
+	new_heading = (front_wheel - rear_wheel).normalized()
+	traction = traction_slow
 	
 	if velocity.length() > slip_speed:
 		traction = traction_fast
 	
-	var d = new_heading.dot(velocity.normalized())
-	if d > 0:
+	new_heading_dot = new_heading.dot(velocity.normalized())
+	if new_heading_dot > 0:
 		velocity = velocity.lerp(new_heading * velocity.length(), traction)
-	if d < 0:
-		velocity = -new_heading * min(velocity.length(), max_speed_reverse)
+	if new_heading_dot < 0:
+		velocity = velocity.lerp(-new_heading * velocity.length(), traction)
 	rotation = new_heading.angle()
 	
 func apply_friction():
@@ -164,3 +185,15 @@ func apply_friction():
 	
 	# Flong += Frr + Fdrag
 	counter_force += drag_force + friction_force
+
+
+func _cubic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2, t: float):
+	var q0 = p0.lerp(p1, t)
+	var q1 = p1.lerp(p2, t)
+	var q2 = p2.lerp(p3, t)
+
+	var r0 = q0.lerp(q1, t)
+	var r1 = q1.lerp(q2, t)
+
+	var s = r0.lerp(r1, t)
+	return s
