@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbmkp4m8wjgfq"]
+
+[ext_resource type="Script" path="res://scenes/car/engine/Engine.gd" id="1_aofac"]
+
+[node name="Engine" type="Node2D"]
+script = ExtResource("1_aofac")
