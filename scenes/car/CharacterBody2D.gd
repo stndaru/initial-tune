@@ -129,6 +129,7 @@ func get_input():
 				turn = 0
 			turn -= turn_rate/steering_weight
 		# Implement steering weight at velocity to reduce turn rate
+		# At higher speed, log(velocity) is approx 3, minus 3 to get decimal and times 1.2 for more weight
 		steer_angle = clamp(steer_angle + turn, \
 				-steering_angle+(steering_angle*(steering_weight-3)*1.2), \
 				steering_angle-(steering_angle*(steering_weight-3)*1.2))
