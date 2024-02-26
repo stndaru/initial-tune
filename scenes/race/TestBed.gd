@@ -7,7 +7,7 @@ func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	#debugs = debugs.bezier_interpolate(Vector2(0, 0), \
 				#Vector2(0.4, 0.8), \
 				#Vector2(1, 1), slider.value/100)\

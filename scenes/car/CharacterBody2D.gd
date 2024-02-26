@@ -17,12 +17,15 @@ var gear_limit = [[0,-0], [0,0], \
 
 # Steering Property
 var steer_angle = 0
-var steer_decay = 0.7
+var steer_decay = 1
 
 # Car Manueverability Data
 var wheel_base = 70  # Distance from front to rear wheel, default 70
 var steering_angle = 45  # Amount that front wheel turns, in degrees
 var steering_weight = 0
+# Multiplier to control power steering, lower means higher manueverability
+# Recommended range: 0.47-0.53
+var steering_weight_multiplier = 0.5
 var weight = 1.2 # Car Weight
 var rear_wheel = Vector2.ZERO
 var front_wheel = Vector2.ZERO
@@ -30,7 +33,7 @@ var new_heading = Vector2.ZERO
 var new_heading_dot = Vector2.ZERO
 
 # Car Engine Data
-var engine_power = 450  # Forward acceleration force.
+var engine_power = 700  # Forward acceleration force.
 var acceleration = Vector2.ZERO
 
 # Engine Property
@@ -48,7 +51,7 @@ var drag = -0.0015
 var drag_force = Vector2.ZERO
 
 # Reverse and Brake
-var brake_power = -2.5
+var brake_power = -2
 var max_speed_reverse = 2500
 
 # Traction
@@ -83,11 +86,14 @@ func _physics_process(delta):
 			" RPM:", snapped(rpm, 0.01), " SPEED:", snapped(velocity.length(),0.01), \
 			" GEAR:", gear, \
 			" || ", \
+			" STRWGT:", steering_weight-3, \
+			" LOGVEL:", log(velocity.length()), \
+			" TURN:", turn)
 			#" INTPLT:", debugs, \
 			#" GAS:", gas, \
 			#" GEARODX:", gear_index, \
-			" NEWHEAD:", snapped(new_heading, 0.01), \
-			" NEWHEADD:", snapped(new_heading_dot, 0.01) )
+			#" NEWHEAD:", snapped(new_heading, 0.01), \
+			#" NEWHEADD:", snapped(new_heading_dot, 0.01) )
 			#" ACC:", snapped(acceleration.length(), 0.01), \
 			#" CTR:", snapped(counter_force.length(), 0.01), \
 			#" FR:", snapped(friction_force.length(), 0.01), \
@@ -113,20 +119,22 @@ func _physics_process(delta):
 func get_input():
 	# Car Steering Wheel Data, Higher Turn -> Steering Wheel Turned More
 	if Input.is_action_pressed("ui_left") || Input.is_action_pressed("ui_right"):
+		steering_weight = log(velocity.length()) * steering_weight_multiplier
 		if Input.is_action_pressed("ui_right"):
 			if turn < 0:
 				turn = 0
-			turn += turn_rate
+			turn += turn_rate/steering_weight
 		if Input.is_action_pressed("ui_left"):
 			if turn > 0:
 				turn = 0
-			turn -= turn_rate
-		# TODO Implement steering weight at velocity to reduce turn rate
-		steering_weight = velocity.length()/100
-		steer_angle = clamp(steer_angle + turn, -steering_angle, steering_angle)
+			turn -= turn_rate/steering_weight
+		# Implement steering weight at velocity to reduce turn rate
+		steer_angle = clamp(steer_angle + turn, \
+				-steering_angle+(steering_angle*(steering_weight-3)*1.2), \
+				steering_angle-(steering_angle*(steering_weight-3)*1.2))
 	else:
-		steer_angle = move_toward(steer_angle, 0, steer_decay)
-		turn = move_toward(turn, 0, steer_decay)
+		steer_angle = move_toward(steer_angle, 0, steer_decay+(steer_decay*steering_weight_multiplier))
+		turn = move_toward(turn, 0, steer_decay+(steer_decay*steering_weight_multiplier))
 		
 	if Input.is_action_pressed("ui_up"):
 		gas = clamp(gas + gas_rate, 0, max_rpm)
@@ -141,7 +149,7 @@ func get_input():
 	acceleration = transform.x * torque
 	
 	if Input.is_action_pressed("ui_down"):
-		counter_force += velocity * brake_power
+		counter_force += velocity * brake_power/clamp(log(velocity.length())-3,0.1,0.8)
 
 func process_gear():
 	gear = gear_shift[gear_index]

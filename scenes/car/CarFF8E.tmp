@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://b74v8vsr3880x"]
+
+[ext_resource type="Script" path="res://scenes/car/CharacterBody2D.gd" id="1_v1jwd"]
+[ext_resource type="Texture2D" uid="uid://d4iw7bryaaol7" path="res://assets/ae86.png" id="2_8p66y"]
+[ext_resource type="Texture2D" uid="uid://dqubhverdt13i" path="res://assets/headlamp.png" id="2_cb44l"]
+[ext_resource type="Script" path="res://scenes/car/FrontLamp.gd" id="2_u10ec"]
+[ext_resource type="Script" path="res://scenes/car/BrakeLamp.gd" id="2_v7xf7"]
+[ext_resource type="Texture2D" uid="uid://ci8lxw7l8wosv" path="res://assets/2d_lights_and_shadows_neutral_point_light.webp" id="4_83xr2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fsnb6"]
+radius = 32.0
+height = 176.0
+
+[node name="Car" type="Node2D"]
+
+[node name="CarBody" type="CharacterBody2D" parent="."]
+script = ExtResource("1_v1jwd")
+
+[node name="Camera2D" type="Camera2D" parent="CarBody"]
+
+[node name="BrakeLamp" type="Node2D" parent="CarBody"]
+script = ExtResource("2_v7xf7")
+
+[node name="BrakeLampLeft" type="PointLight2D" parent="CarBody/BrakeLamp"]
+color = Color(1, 0.0784314, 0, 1)
+texture = ExtResource("4_83xr2")
+texture_scale = 0.2
+
+[node name="BrakeLampRight" type="PointLight2D" parent="CarBody/BrakeLamp"]
+color = Color(1, 0.0784314, 0, 1)
+texture = ExtResource("4_83xr2")
+texture_scale = 0.2
+
+[node name="FrontLamp" type="Node2D" parent="CarBody"]
+script = ExtResource("2_u10ec")
+
+[node name="HeadLampLeft" type="PointLight2D" parent="CarBody/FrontLamp"]
+rotation = -3.14159
+color = Color(1, 0.686275, 0.0941176, 1)
+energy = 1.2
+texture = ExtResource("2_cb44l")
+
+[node name="HeadLampRight" type="PointLight2D" parent="CarBody/FrontLamp"]
+rotation = -3.14159
+color = Color(1, 0.686275, 0.0941176, 1)
+energy = 1.2
+texture = ExtResource("2_cb44l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CarBody"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_fsnb6")
+
+[node name="Sprite2D" type="Sprite2D" parent="CarBody"]
+position = Vector2(0, -1.90735e-06)
+rotation = 3.14159
+scale = Vector2(0.283241, 0.283241)
+texture = ExtResource("2_8p66y")
+offset = Vector2(-7, 0)
