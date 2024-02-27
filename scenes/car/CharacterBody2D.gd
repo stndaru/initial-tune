@@ -1,19 +1,25 @@
 extends CharacterBody2D
 
+# Temporary Debug Value
+var type_circ = 0
+var temp_speed = 0
+var is_mouse_and_keyboard = true
+
 # General Default Value
 var turn = 0 # Rate at which steer angle increases
 var turn_rate = 0.5 # Rate of change for turn
 var gas = 0 # Rate at which rpm increases
 var gas_rate = 0.2 # Rate of change for gas
-var debugs = Vector2.ZERO
+var delivered_power = 0
+var rpm_rev = 0
 
 # Gearing
 var gear = 0
 var gear_index = 1
 var gear_shift = ["R" ,"N" ,1 ,2 ,3 ,4 ,5]
-var gear_ratio = [-0.3, 0, 0.4, 0.5, 0.7, 0.9, 1]
-var gear_limit = [[0,-0], [0,0], \
-					[0, 0], [0,0], [0,0], [0,0], [0,0]]
+var gear_ratio = [-3, 0, 3.2, 1.9, 1.2, 0.86, 0.8]
+var gear_effectivity = 0
+var final_drive_ratio = 4.6
 
 # Steering Property
 var steer_angle = 0
@@ -31,14 +37,15 @@ var rear_wheel = Vector2.ZERO
 var front_wheel = Vector2.ZERO
 var new_heading = Vector2.ZERO
 var new_heading_dot = Vector2.ZERO
+var wheel_diameter = 7
 
 # Car Engine Data
-var engine_power = 700  # Forward acceleration force.
+var engine_power = 150  # Forward acceleration force.
 var acceleration = Vector2.ZERO
 
 # Engine Property
 var rpm = 0
-var max_rpm = 7
+var max_rpm = 7000
 var rpm_decay = 50
 var rpm_delay = 0.8 # Delay of rpm following gas input
 var torque = 0
@@ -47,8 +54,10 @@ var torque = 0
 var counter_force = Vector2.ZERO
 var friction = -0.9
 var friction_force = Vector2.ZERO
-var drag = -0.0015
+var drag = -0.0003
 var drag_force = Vector2.ZERO
+var engine_brake = 0
+var engine_brake_force = Vector2.ZERO
 
 # Reverse and Brake
 var brake_power = -2
@@ -72,7 +81,6 @@ func _ready():
 	traction = traction_slow
 	new_heading_dot = new_heading.dot(velocity.normalized())
 	
-
 func _input(event):
 	if event.is_action_pressed("ui_shift_up") || event.is_action_pressed("ui_shift_down"):
 		if event.is_action_pressed("ui_shift_up"):
@@ -86,16 +94,17 @@ func _physics_process(delta):
 			" RPM:", snapped(rpm, 0.01), " SPEED:", snapped(velocity.length(),0.01), \
 			" GEAR:", gear, \
 			" || ", \
-			" STRWGT:", steering_weight-3, \
-			" LOGVEL:", log(velocity.length()), \
-			" TURN:", turn)
-			#" INTPLT:", debugs, \
-			#" GAS:", gas, \
+			#" STRWGT:", steering_weight-3, \
+			#" LOGVEL:", log(velocity.length()), \
+			#" TURN:", turn
+			" GAS:", gas, \
 			#" GEARODX:", gear_index, \
 			#" NEWHEAD:", snapped(new_heading, 0.01), \
 			#" NEWHEADD:", snapped(new_heading_dot, 0.01) )
+			" GREF:", gear_effectivity)
 			#" ACC:", snapped(acceleration.length(), 0.01), \
 			#" CTR:", snapped(counter_force.length(), 0.01), \
+			#" BRK:", snapped((velocity * brake_power/clamp(log(velocity.length())-3,0.1,3)).length(), 0.01), \
 			#" FR:", snapped(friction_force.length(), 0.01), \
 			#" DRG:", snapped(drag_force.length(), 0.01))
 			
@@ -106,8 +115,6 @@ func _physics_process(delta):
 	calculate_steering(delta)
 	# Here acceleration is already calculated in get_input() and apply_friction()
 	# As there is no Force in CharacterBody2D, use velocity instead
-	# Velocity is the direction based on force on x and force on y, 
-	# somehow need way to make this a quadratic curve
 	if counter_force.length() > acceleration.length() and velocity.is_zero_approx():
 		velocity = Vector2.ZERO
 	else:
@@ -138,24 +145,58 @@ func get_input():
 		turn = move_toward(turn, 0, steer_decay+(steer_decay*steering_weight_multiplier))
 		
 	if Input.is_action_pressed("ui_up"):
-		gas = clamp(gas + gas_rate, 0, max_rpm)
-		rpm = _cubic_bezier(Vector2(0,0), Vector2(0.64,0.24), Vector2(0.62,0.97), \
-						Vector2(1,1), gas/7).y * 7000
+		if is_mouse_and_keyboard:
+			gas = clamp(gas + gas_rate, 0, 1)
+		else:
+			gas = Input.get_action_strength("ui_up")
+			Input.start_joy_vibration(0, gas*0.2, 0, 0.1)
 	else:
 		gas = move_toward(gas, 0, gas_rate)
-		rpm = move_toward(rpm, 0, rpm_decay)
 	
-	# transform.x is direction of force horizontally (going forward)
-	torque = gas * (rpm/7000) * (engine_power*gear_ratio[gear_index])
-	acceleration = transform.x * torque
+	if gear_index == 1:
+		# Revving system which increase RPM during neutral
+		if Input.is_action_pressed("ui_up"):
+			rpm_rev = clamp(rpm_rev + 0.1,0,1)
+			rpm = clamp(_cubic_bezier(Vector2(0,0), Vector2(0.54,0.33), Vector2(0.41,1.35), \
+									Vector2(1,1), rpm_rev).y, 0.2, 1) * max_rpm
+		else:
+			rpm = move_toward(rpm, 0, rpm_decay)
+			rpm_rev = move_toward(rpm_rev, 0, rpm_decay)
+	else:
+		rpm = velocity.length() * gear_ratio[gear_index] * final_drive_ratio 
+		# Limit the RPM within the limit
+		if abs(rpm) > max_rpm:
+			rpm = move_toward(rpm, max_rpm, abs(rpm)-max_rpm)
+		# Actual power delivered with the RPM
+		delivered_power = clamp(_cubic_bezier(Vector2(0,0), Vector2(0.54,0.33), Vector2(0.41,1.35), \
+								Vector2(1,1), rpm/max_rpm).y, 0.2, 1) * engine_power + 50
+		torque = gas * delivered_power * gear_effectivity
+		# Adds acceleration penalty on lower RPM in higher gear
+		# Also impacts lower gear but not that strong thanks to the gear index
+		if abs(rpm) < 3000:
+			torque *= gear_ratio[gear_index] * (1-_cubic_bezier(Vector2(0.1,0.1), \
+					Vector2(0.93,0.05), Vector2(0.76,0.75), Vector2(1,1), rpm/max_rpm).y)
+		acceleration = transform.x * torque
 	
 	if Input.is_action_pressed("ui_down"):
-		counter_force += velocity * brake_power/clamp(log(velocity.length())-3,0.1,0.8)
+		if is_mouse_and_keyboard:
+			counter_force += velocity * brake_power/clamp(log(velocity.length())-3,0.1,2)
+		else:
+			Input.start_joy_vibration(0, gas*0.2, 0, 0.1)
+			counter_force += Input.get_action_strength("ui_down") * \
+							velocity * brake_power/clamp(log(velocity.length())-3,0.1,2)
 
 func process_gear():
 	gear = gear_shift[gear_index]
-	# TODO Set RPM downshift based on final drive ratio
-	#rpm = 
+	gear_effectivity = 0
+	if gear_index > 1:
+		for ratios in range(1, gear_index+1):
+			# Current implementation: use acceleration penalty for low speed high gear
+			# This implementation allows you to skip to high gear as it delivered full torque
+			gear_effectivity += gear_ratio[ratios]
+	else:
+		gear_effectivity = -gear_ratio[gear_index]
+	
 
 func calculate_steering(delta):
 	# Set the Wheel Positions
@@ -187,13 +228,18 @@ func apply_friction():
 	# Fdrag = v * |v| * Cdrag
 	drag_force = velocity * velocity.length() * drag
 	
+	engine_brake = clamp(\
+					(velocity.length() * gear_ratio[gear_index] * final_drive_ratio - max_rpm)/max_rpm \
+					, 0, 1) * 0.5
+	engine_brake_force = velocity * -engine_brake
+	
 	if velocity.length() < 100:
 		friction_force *= 3
-	elif velocity.length() > 500 and acceleration == Vector2.ZERO:
+	elif velocity.length() > 500:
 		friction_force *= 0.5
 	
 	# Flong += Frr + Fdrag
-	counter_force += drag_force + friction_force
+	counter_force += drag_force + friction_force + engine_brake_force
 
 
 func _cubic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2, t: float):

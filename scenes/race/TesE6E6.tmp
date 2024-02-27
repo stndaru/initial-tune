@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnrcjxns67w0s"]
+[gd_scene load_steps=7 format=3 uid="uid://bnrcjxns67w0s"]
 
 [ext_resource type="Texture2D" uid="uid://d1qbfwu6sek5c" path="res://assets/parking_lot.jpg" id="1_1hj4h"]
 [ext_resource type="Script" path="res://scenes/race/TestBed.gd" id="1_ukyr4"]
 [ext_resource type="PackedScene" uid="uid://b74v8vsr3880x" path="res://scenes/car/Car.tscn" id="2_nvm56"]
 [ext_resource type="Texture2D" uid="uid://5nfqpvxc4xmr" path="res://assets/lamp_post_vertical.png" id="3_gti5y"]
-[ext_resource type="Texture2D" uid="uid://bnpnd8gkdquvk" path="res://assets/grid.png" id="3_oitgw"]
 [ext_resource type="Texture2D" uid="uid://ci8lxw7l8wosv" path="res://assets/2d_lights_and_shadows_neutral_point_light.webp" id="4_hrxj3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c10b1"]
@@ -13,20 +12,13 @@ radius = 26.0768
 [node name="TestBed" type="Node"]
 script = ExtResource("1_ukyr4")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.25098, 0.25098, 0.25098, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(464, 406)
 scale = Vector2(5.57, 5.57)
 texture = ExtResource("1_1hj4h")
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-scale = Vector2(20.395, 20.395)
-texture = ExtResource("3_oitgw")
 
 [node name="Car" parent="." instance=ExtResource("2_nvm56")]
 
