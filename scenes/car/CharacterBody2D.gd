@@ -17,7 +17,7 @@ var rpm_rev = 0
 var gear = 0
 var gear_index = 1
 var gear_shift = ["R" ,"N" ,1 ,2 ,3 ,4 ,5]
-var gear_ratio = [-3, 0, 3.2, 1.9, 1.2, 0.86, 0.75]
+var gear_ratio = [-2.8, 0, 3.2, 1.9, 1.2, 0.86, 0.75]
 var gear_effectivity = 0
 var final_drive_ratio = 4.6
 
@@ -90,6 +90,7 @@ func _input(event):
 		process_gear()
 
 func _physics_process(delta):
+	debug_print()
 	acceleration = Vector2.ZERO
 	counter_force = Vector2.ZERO
 	get_input()
@@ -243,13 +244,13 @@ func apply_friction():
 func debug_print():
 	print("TORQUE:", snapped(torque, 0.01), \
 			" RPM:", snapped(rpm, 0.01), " SPEED:", snapped(velocity.length(),0.01), \
-			" GEAR:", gear, \
-			" || ", \
-			" STRWGT:", steering_weight-3, \
+			" GEAR:", gear) #, \
+			#" || ", \
+			#" STRWGT:", steering_weight-3, \
 			#" LOGVEL:", log(velocity.length()), \
-			" TURN:", turn, \
-			" STRANG:", steer_angle, \
-			" ASD:", steering_angle-(steering_angle*(steering_weight-3)*1.2) )
+			#" TURN:", turn, \
+			#" STRANG:", steer_angle, \
+			#" ASD:", steering_angle-(steering_angle*(steering_weight-3)*1.2) )
 			#" GAS:", gas, \
 			#" GEARODX:", gear_index, \
 			#" NEWHEAD:", snapped(new_heading, 0.01), \

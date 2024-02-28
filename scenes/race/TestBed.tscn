@@ -38,7 +38,6 @@ texture = ExtResource("4_53lly")
 [node name="Car" parent="." instance=ExtResource("2_nvm56")]
 
 [node name="Lamps" type="Node2D" parent="."]
-visible = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Lamps"]
 position = Vector2(-1040, 395)
