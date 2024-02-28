@@ -97,7 +97,8 @@ func _physics_process(delta):
 			" STRWGT:", steering_weight-3, \
 			#" LOGVEL:", log(velocity.length()), \
 			" TURN:", turn, \
-			" STRANG:", steer_angle )
+			" STRANG:", steer_angle, \
+			" ASD:", steering_angle-(steering_angle*(steering_weight-3)*1.2) )
 			#" GAS:", gas, \
 			#" GEARODX:", gear_index, \
 			#" NEWHEAD:", snapped(new_heading, 0.01), \
@@ -127,7 +128,7 @@ func _physics_process(delta):
 func get_input():
 	# Car Steering Wheel Data, Higher Turn -> Steering Wheel Turned More
 	if Input.is_action_pressed("ui_left") || Input.is_action_pressed("ui_right"):
-		steering_weight = log(velocity.length()) * steering_weight_multiplier
+		steering_weight = clamp(log(velocity.length()), 0, 99) * steering_weight_multiplier
 		if is_mouse_and_keyboard:
 			if Input.is_action_pressed("ui_right"):
 				if turn < 0:
@@ -148,9 +149,17 @@ func get_input():
 			# TODO When using controller, you have advantage of no steering weight delay
 			if Input.is_action_pressed("ui_right"):
 				# TODO Add steering decay, currently turn keeps overriding the move_toward
-				turn = Input.get_action_strength("ui_right") * steering_angle
+				if turn < 0:
+					turn = move_toward(turn, 0, steer_decay+(steer_decay*steering_weight_multiplier)*2)
+				else:
+					turn = move_toward(turn, Input.get_action_strength("ui_right") * steering_angle, \
+										clamp(1 - steering_weight-3, 0.2, 1) * 5)
 			if Input.is_action_pressed("ui_left"):
-				turn = -Input.get_action_strength("ui_left") * steering_angle
+				if turn > 0:
+					turn = move_toward(turn, 0, steer_decay+(steer_decay*steering_weight_multiplier)*2)
+				else:
+					turn = move_toward(turn, -Input.get_action_strength("ui_left") * steering_angle, \
+										clamp(1 - steering_weight-3, 0.2, 1) * 2)
 			steer_angle = clamp(turn, \
 				-steering_angle+(steering_angle*(steering_weight-3)*1.2), \
 				steering_angle-(steering_angle*(steering_weight-3)*1.2))
