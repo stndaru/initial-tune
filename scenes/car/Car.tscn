@@ -17,6 +17,7 @@ height = 176.0
 script = ExtResource("1_v1jwd")
 
 [node name="Camera2D" type="Camera2D" parent="CarBody"]
+zoom = Vector2(0.5, 0.5)
 
 [node name="BrakeLamp" type="Node2D" parent="CarBody"]
 script = ExtResource("2_v7xf7")

@@ -90,26 +90,6 @@ func _input(event):
 		process_gear()
 
 func _physics_process(delta):
-	print("TORQUE:", snapped(torque, 0.01), \
-			" RPM:", snapped(rpm, 0.01), " SPEED:", snapped(velocity.length(),0.01), \
-			" GEAR:", gear, \
-			" || ", \
-			" STRWGT:", steering_weight-3, \
-			#" LOGVEL:", log(velocity.length()), \
-			" TURN:", turn, \
-			" STRANG:", steer_angle, \
-			" ASD:", steering_angle-(steering_angle*(steering_weight-3)*1.2) )
-			#" GAS:", gas, \
-			#" GEARODX:", gear_index, \
-			#" NEWHEAD:", snapped(new_heading, 0.01), \
-			#" NEWHEADD:", snapped(new_heading_dot, 0.01) )
-			#" GREF:", gear_effectivity)
-			#" ACC:", snapped(acceleration.length(), 0.01), \
-			#" CTR:", snapped(counter_force.length(), 0.01), \
-			#" BRK:", snapped((velocity * brake_power/clamp(log(velocity.length())-3,0.1,3)).length(), 0.01), \
-			#" FR:", snapped(friction_force.length(), 0.01), \
-			#" DRG:", snapped(drag_force.length(), 0.01))
-			
 	acceleration = Vector2.ZERO
 	counter_force = Vector2.ZERO
 	get_input()
@@ -123,8 +103,6 @@ func _physics_process(delta):
 		velocity += (acceleration + counter_force) / weight * delta
 	move_and_slide()
 
-# TODO Change input from using turn_rate to 0 and 1 and use axis for joystick support
-# Reference https://docs.godotengine.org/en/stable/tutorials/inputs/controllers_gamepads_joysticks.html
 func get_input():
 	# Car Steering Wheel Data, Higher Turn -> Steering Wheel Turned More
 	if Input.is_action_pressed("ui_left") || Input.is_action_pressed("ui_right"):
@@ -146,9 +124,7 @@ func get_input():
 				-steering_angle+(steering_angle*(steering_weight-3)*1.2), \
 				steering_angle-(steering_angle*(steering_weight-3)*1.2))
 		else:
-			# TODO When using controller, you have advantage of no steering weight delay
 			if Input.is_action_pressed("ui_right"):
-				# TODO Add steering decay, currently turn keeps overriding the move_toward
 				if turn < 0:
 					turn = move_toward(turn, 0, steer_decay+(steer_decay*steering_weight_multiplier)*2)
 				else:
@@ -264,14 +240,32 @@ func apply_friction():
 	# Flong += Frr + Fdrag
 	counter_force += drag_force + friction_force + engine_brake_force
 
+func debug_print():
+	print("TORQUE:", snapped(torque, 0.01), \
+			" RPM:", snapped(rpm, 0.01), " SPEED:", snapped(velocity.length(),0.01), \
+			" GEAR:", gear, \
+			" || ", \
+			" STRWGT:", steering_weight-3, \
+			#" LOGVEL:", log(velocity.length()), \
+			" TURN:", turn, \
+			" STRANG:", steer_angle, \
+			" ASD:", steering_angle-(steering_angle*(steering_weight-3)*1.2) )
+			#" GAS:", gas, \
+			#" GEARODX:", gear_index, \
+			#" NEWHEAD:", snapped(new_heading, 0.01), \
+			#" NEWHEADD:", snapped(new_heading_dot, 0.01) )
+			#" GREF:", gear_effectivity)
+			#" ACC:", snapped(acceleration.length(), 0.01), \
+			#" CTR:", snapped(counter_force.length(), 0.01), \
+			#" BRK:", snapped((velocity * brake_power/clamp(log(velocity.length())-3,0.1,3)).length(), 0.01), \
+			#" FR:", snapped(friction_force.length(), 0.01), \
+			#" DRG:", snapped(drag_force.length(), 0.01))
 
 func _cubic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2, t: float):
 	var q0 = p0.lerp(p1, t)
 	var q1 = p1.lerp(p2, t)
 	var q2 = p2.lerp(p3, t)
-
 	var r0 = q0.lerp(q1, t)
 	var r1 = q1.lerp(q2, t)
-
 	var s = r0.lerp(r1, t)
 	return s
