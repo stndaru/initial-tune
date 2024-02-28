@@ -4,7 +4,10 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	InputMap.action_set_deadzone("ui_up", 0.2) 
+	InputMap.action_set_deadzone("ui_up", 0.1) 
+	InputMap.action_set_deadzone("ui_down", 0.1) 
+	InputMap.action_set_deadzone("ui_left", 0.1) 
+	InputMap.action_set_deadzone("ui_right", 0.1) 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

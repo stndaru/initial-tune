@@ -3,7 +3,7 @@ extends CharacterBody2D
 # Temporary Debug Value
 var type_circ = 0
 var temp_speed = 0
-var is_mouse_and_keyboard = true
+var is_mouse_and_keyboard = false
 
 # General Default Value
 var turn = 0 # Rate at which steer angle increases
@@ -94,14 +94,15 @@ func _physics_process(delta):
 			" RPM:", snapped(rpm, 0.01), " SPEED:", snapped(velocity.length(),0.01), \
 			" GEAR:", gear, \
 			" || ", \
-			#" STRWGT:", steering_weight-3, \
+			" STRWGT:", steering_weight-3, \
 			#" LOGVEL:", log(velocity.length()), \
-			#" TURN:", turn
-			" GAS:", gas, \
+			" TURN:", turn, \
+			" STRANG:", steer_angle )
+			#" GAS:", gas, \
 			#" GEARODX:", gear_index, \
 			#" NEWHEAD:", snapped(new_heading, 0.01), \
 			#" NEWHEADD:", snapped(new_heading_dot, 0.01) )
-			" GREF:", gear_effectivity)
+			#" GREF:", gear_effectivity)
 			#" ACC:", snapped(acceleration.length(), 0.01), \
 			#" CTR:", snapped(counter_force.length(), 0.01), \
 			#" BRK:", snapped((velocity * brake_power/clamp(log(velocity.length())-3,0.1,3)).length(), 0.01), \
@@ -127,17 +128,30 @@ func get_input():
 	# Car Steering Wheel Data, Higher Turn -> Steering Wheel Turned More
 	if Input.is_action_pressed("ui_left") || Input.is_action_pressed("ui_right"):
 		steering_weight = log(velocity.length()) * steering_weight_multiplier
-		if Input.is_action_pressed("ui_right"):
-			if turn < 0:
-				turn = 0
-			turn += turn_rate/steering_weight
-		if Input.is_action_pressed("ui_left"):
-			if turn > 0:
-				turn = 0
-			turn -= turn_rate/steering_weight
-		# Implement steering weight at velocity to reduce turn rate
-		# At higher speed, log(velocity) is approx 3, minus 3 to get decimal and times 1.2 for more weight
-		steer_angle = clamp(steer_angle + turn, \
+		if is_mouse_and_keyboard:
+			if Input.is_action_pressed("ui_right"):
+				if turn < 0:
+					turn = 0
+				turn += (steering_angle/20.0)/steering_weight
+				turn = clamp(turn, 0, steering_angle)
+			if Input.is_action_pressed("ui_left"):
+				if turn > 0:
+					turn = 0
+				turn -= (steering_angle/20.0)/steering_weight
+				turn = clamp(turn, -steering_angle, 0)
+			# Implement steering weight at velocity to reduce turn rate
+			# At higher speed, log(velocity) is approx 3, minus 3 to get decimal and times 1.2 for more weight
+			steer_angle = clamp(steer_angle + turn, \
+				-steering_angle+(steering_angle*(steering_weight-3)*1.2), \
+				steering_angle-(steering_angle*(steering_weight-3)*1.2))
+		else:
+			# TODO When using controller, you have advantage of no steering weight delay
+			if Input.is_action_pressed("ui_right"):
+				# TODO Add steering decay, currently turn keeps overriding the move_toward
+				turn = Input.get_action_strength("ui_right") * steering_angle
+			if Input.is_action_pressed("ui_left"):
+				turn = -Input.get_action_strength("ui_left") * steering_angle
+			steer_angle = clamp(turn, \
 				-steering_angle+(steering_angle*(steering_weight-3)*1.2), \
 				steering_angle-(steering_angle*(steering_weight-3)*1.2))
 	else:
