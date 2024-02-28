@@ -3,7 +3,7 @@ extends CharacterBody2D
 # Temporary Debug Value
 var type_circ = 0
 var temp_speed = 0
-var is_mouse_and_keyboard = false
+var is_mouse_and_keyboard = true
 
 # General Default Value
 var turn = 0 # Rate at which steer angle increases
@@ -17,7 +17,7 @@ var rpm_rev = 0
 var gear = 0
 var gear_index = 1
 var gear_shift = ["R" ,"N" ,1 ,2 ,3 ,4 ,5]
-var gear_ratio = [-3, 0, 3.2, 1.9, 1.2, 0.86, 0.8]
+var gear_ratio = [-3, 0, 3.2, 1.9, 1.2, 0.86, 0.75]
 var gear_effectivity = 0
 var final_drive_ratio = 4.6
 
@@ -159,7 +159,7 @@ func get_input():
 					turn = move_toward(turn, 0, steer_decay+(steer_decay*steering_weight_multiplier)*2)
 				else:
 					turn = move_toward(turn, -Input.get_action_strength("ui_left") * steering_angle, \
-										clamp(1 - steering_weight-3, 0.2, 1) * 2)
+										clamp(1 - steering_weight-3, 0.2, 1) * 5)
 			steer_angle = clamp(turn, \
 				-steering_angle+(steering_angle*(steering_weight-3)*1.2), \
 				steering_angle-(steering_angle*(steering_weight-3)*1.2))
@@ -259,7 +259,7 @@ func apply_friction():
 	if velocity.length() < 100:
 		friction_force *= 3
 	elif velocity.length() > 500:
-		friction_force *= 0.5
+		friction_force *= 0.35
 	
 	# Flong += Frr + Fdrag
 	counter_force += drag_force + friction_force + engine_brake_force
