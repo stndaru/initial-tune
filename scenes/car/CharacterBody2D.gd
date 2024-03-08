@@ -17,7 +17,7 @@ var rpm_rev = 0
 var gear = 0
 var gear_index = 1
 var gear_shift = ["R" ,"N" ,1 ,2 ,3 ,4 ,5]
-var gear_ratio = [-2.8, 0, 3.2, 1.9, 1.2, 0.86, 0.75]
+var gear_ratio = [-2.8, 0, 3, 1.5, 1, 0.92, 0.80]
 var gear_effectivity = 0
 var final_drive_ratio = 4.6
 
