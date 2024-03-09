@@ -10,12 +10,14 @@ polygon = PackedVector2Array(-105, 2, -107, 8, -114, 13, -125, 18, -138, 17, -14
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-129, 0)
-color = Color(1, 0.74902, 0, 1)
+color = Color(1, 0.65098, 0, 1)
+energy = 1.2
 shadow_enabled = true
 texture = ExtResource("1_7rmr3")
 texture_scale = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
 texture = ExtResource("2_kv3em")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]

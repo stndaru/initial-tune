@@ -1,20 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://b74v8vsr3880x"]
+[gd_scene load_steps=11 format=3 uid="uid://b74v8vsr3880x"]
 
-[ext_resource type="Script" path="res://scenes/car/CharacterBody2D.gd" id="1_v1jwd"]
+[ext_resource type="PackedScene" uid="uid://be3qey64oy8v4" path="res://scenes/GUI.tscn" id="1_vvuxk"]
 [ext_resource type="Texture2D" uid="uid://d4iw7bryaaol7" path="res://assets/ae86.png" id="2_8p66y"]
-[ext_resource type="Texture2D" uid="uid://dqubhverdt13i" path="res://assets/headlamp.png" id="2_cb44l"]
+[ext_resource type="Script" path="res://scenes/GUI.gd" id="2_r5xpt"]
 [ext_resource type="Script" path="res://scenes/car/FrontLamp.gd" id="2_u10ec"]
 [ext_resource type="Script" path="res://scenes/car/BrakeLamp.gd" id="2_v7xf7"]
+[ext_resource type="Script" path="res://scenes/car/CarPhysics.gd" id="3_dp8ms"]
 [ext_resource type="Texture2D" uid="uid://ci8lxw7l8wosv" path="res://assets/2d_lights_and_shadows_neutral_point_light.webp" id="4_83xr2"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fsnb6"]
-radius = 32.0
-height = 176.0
+[ext_resource type="Texture2D" uid="uid://8fu1ver2vtkt" path="res://assets/headlampsmall.png" id="5_2yn86"]
+[ext_resource type="Script" path="res://scenes/car/ReverseLamp.gd" id="6_4qab2"]
+[ext_resource type="Texture2D" uid="uid://dqubhverdt13i" path="res://assets/headlampbeam.png" id="6_a0pke"]
 
 [node name="Car" type="Node2D"]
 
+[node name="Gui" parent="." instance=ExtResource("1_vvuxk")]
+script = ExtResource("2_r5xpt")
+
 [node name="CarBody" type="CharacterBody2D" parent="."]
-script = ExtResource("1_v1jwd")
+script = ExtResource("3_dp8ms")
 
 [node name="Camera2D" type="Camera2D" parent="CarBody"]
 zoom = Vector2(0.5, 0.5)
@@ -32,24 +35,47 @@ color = Color(1, 0.0784314, 0, 1)
 texture = ExtResource("4_83xr2")
 texture_scale = 0.2
 
+[node name="ReverseLamp" type="Node2D" parent="CarBody"]
+script = ExtResource("6_4qab2")
+
+[node name="ReverseLampLeft" type="PointLight2D" parent="CarBody/ReverseLamp"]
+energy = 0.8
+texture = ExtResource("4_83xr2")
+texture_scale = 0.1
+
+[node name="ReverseLampRight" type="PointLight2D" parent="CarBody/ReverseLamp"]
+energy = 0.8
+texture = ExtResource("4_83xr2")
+texture_scale = 0.1
+
 [node name="FrontLamp" type="Node2D" parent="CarBody"]
 script = ExtResource("2_u10ec")
 
-[node name="HeadLampLeft" type="PointLight2D" parent="CarBody/FrontLamp"]
+[node name="HeadLampLeftSmall" type="PointLight2D" parent="CarBody/FrontLamp"]
 rotation = -3.14159
-color = Color(1, 0.686275, 0.0941176, 1)
-energy = 1.2
-texture = ExtResource("2_cb44l")
+color = Color(1, 0.690196, 0, 1)
+energy = 0.8
+texture = ExtResource("5_2yn86")
+texture_scale = 0.8
 
-[node name="HeadLampRight" type="PointLight2D" parent="CarBody/FrontLamp"]
+[node name="HeadLampLeftLarge" type="PointLight2D" parent="CarBody/FrontLamp"]
 rotation = -3.14159
-color = Color(1, 0.686275, 0.0941176, 1)
+color = Color(1, 0.952941, 0.894118, 1)
 energy = 1.2
-texture = ExtResource("2_cb44l")
+texture = ExtResource("6_a0pke")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CarBody"]
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_fsnb6")
+[node name="HeadLampRightSmall" type="PointLight2D" parent="CarBody/FrontLamp"]
+rotation = -3.14159
+color = Color(1, 0.690196, 0, 1)
+energy = 0.8
+texture = ExtResource("5_2yn86")
+texture_scale = 0.8
+
+[node name="HeadLampRightLarge" type="PointLight2D" parent="CarBody/FrontLamp"]
+rotation = -3.14159
+color = Color(1, 0.952941, 0.894118, 1)
+energy = 1.2
+texture = ExtResource("6_a0pke")
 
 [node name="Sprite2D" type="Sprite2D" parent="CarBody"]
 position = Vector2(0, -1.90735e-06)
@@ -57,3 +83,6 @@ rotation = 3.14159
 scale = Vector2(0.283241, 0.283241)
 texture = ExtResource("2_8p66y")
 offset = Vector2(-7, 0)
+
+[node name="CarCollision" type="CollisionPolygon2D" parent="CarBody"]
+polygon = PackedVector2Array(-78.719, 28.142, -79.5458, 25.9765, -80.3674, 18.9497, -81.1183, 9.85613, -81.3821, 0, -81, -10, -80.3513, -19.1301, -79.5068, -25.8955, -77.96, -28.061, -73.9826, -29.1658, -53, -31, -10, -31, 39, -31, 61, -30, 72, -29, 78, -28, 80, -27, 81.1113, -25.3115, 81.6741, -20.5439, 82.255, 0, 82.003, 18.7127, 81.6559, 23.8054, 80.762, 25.6926, 78.7424, 26.8514, 72.965, 28.0058, 61, 30, 30, 31, -55, 31, -72, 30, -76.9079, 29.3232)
