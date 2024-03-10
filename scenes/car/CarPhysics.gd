@@ -22,7 +22,7 @@ var tweenBass = 0
 # Gearing
 var gear = 0
 var gear_index = 1
-var gear_shift = ["R" ,"N" ,1 ,2 ,3 ,4 ,5]
+var gear_shift = ["R" ,"N" ,"1" ,"2" ,"3" ,"4" ,"5"]
 var gear_ratio = [-2.8, 0, 3, 1.5, 1, 0.9, 0.81]
 var gear_effectivity = 0
 var final_drive_ratio = 4.5
@@ -98,7 +98,7 @@ func _input(event):
 		process_gear()
 
 func _physics_process(delta):
-	debug_print()
+	#debug_print()
 	acceleration = Vector2.ZERO
 	counter_force = Vector2.ZERO
 	get_input()

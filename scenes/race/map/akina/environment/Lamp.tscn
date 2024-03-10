@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c68ld216l04oo"]
 
-[ext_resource type="Texture2D" uid="uid://ci8lxw7l8wosv" path="res://assets/environment/2d_lights_and_shadows_neutral_point_light.webp" id="1_7rmr3"]
+[ext_resource type="Texture2D" uid="uid://ci8lxw7l8wosv" path="res://assets/environment/2d_lights_and_shadows_neutral_point_light.webp" id="1_1ay8g"]
 [ext_resource type="Texture2D" uid="uid://gg5l2sd3s5xd" path="res://assets/environment/street-light-top-view-png-1.png" id="2_sw6m2"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a70ks"]
@@ -13,7 +13,7 @@ position = Vector2(-129, 0)
 color = Color(1, 0.65098, 0, 1)
 energy = 1.2
 shadow_enabled = true
-texture = ExtResource("1_7rmr3")
+texture = ExtResource("1_1ay8g")
 texture_scale = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

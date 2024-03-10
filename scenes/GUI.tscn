@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://be3qey64oy8v4"]
+[gd_scene load_steps=6 format=3 uid="uid://be3qey64oy8v4"]
 
-[ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="1_rosqn"]
+[ext_resource type="Texture2D" uid="uid://bqmftyomny6sj" path="res://assets/cars/speedometer.png" id="1_3lej6"]
+[ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="1_jh0vr"]
 [ext_resource type="Shader" path="res://shaders/crt.gdshader" id="2_0qlul"]
+[ext_resource type="Texture2D" uid="uid://caydiqq2wr2na" path="res://assets/cars/speedometerneedle.png" id="2_lli0f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7h7tp"]
 shader = ExtResource("2_0qlul")
@@ -29,34 +31,133 @@ shader_parameter/vignette_opacity = 0.5
 
 [node name="Gui" type="CanvasLayer"]
 
-[node name="Speed" type="Control" parent="."]
+[node name="DateTime" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -114.0
+offset_right = 326.0
+grow_vertical = 0
+
+[node name="Time" type="Label" parent="DateTime"]
+layout_mode = 0
+offset_left = 51.0
+offset_right = 235.0
+offset_bottom = 36.0
+theme_override_fonts/font = ExtResource("1_jh0vr")
+theme_override_font_sizes/font_size = 40
+text = "AM 01:32"
+
+[node name="Date" type="Label" parent="DateTime"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 43.0
+offset_right = 304.0
+offset_bottom = 79.0
+theme_override_fonts/font = ExtResource("1_jh0vr")
+theme_override_font_sizes/font_size = 40
+text = "APR.18 1990"
+
+[node name="BottomUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -101.0
-offset_top = -64.0
-offset_right = 101.0
+offset_left = -427.0
+offset_top = -158.0
+offset_right = 427.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="SpeedLabel" type="Label" parent="Speed"]
+[node name="Speedometer" type="Control" parent="BottomUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 203.0
+offset_right = 652.0
+offset_bottom = 152.0
+
+[node name="Values" type="TextureRect" parent="BottomUI/Speedometer"]
+layout_mode = 0
+offset_right = 1100.0
+offset_bottom = 400.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_3lej6")
+
+[node name="SpeedMeter" type="TextureRect" parent="BottomUI/Speedometer"]
+layout_mode = 0
+offset_left = -149.0
+offset_top = 68.0
+offset_right = 208.0
+offset_bottom = 124.0
+rotation = -0.296279
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(285, 30)
+texture = ExtResource("2_lli0f")
+
+[node name="RpmMeter" type="TextureRect" parent="BottomUI/Speedometer"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 66.0
+offset_right = 367.0
+offset_bottom = 122.0
+rotation = -0.35249
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(285, 30)
+texture = ExtResource("2_lli0f")
+
+[node name="Speed" type="Control" parent="BottomUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 618.0
+offset_top = 37.0
+offset_right = 820.0
+offset_bottom = 76.0
+
+[node name="SpeedLabel" type="Label" parent="BottomUI/Speed"]
 layout_mode = 0
 offset_right = 138.0
 offset_bottom = 36.0
-theme_override_fonts/font = ExtResource("1_rosqn")
+theme_override_fonts/font = ExtResource("1_jh0vr")
 theme_override_font_sizes/font_size = 40
 text = "SPEED:"
 
-[node name="SpeedValue" type="Label" parent="Speed"]
+[node name="SpeedValue" type="Label" parent="BottomUI/Speed"]
 layout_mode = 0
 offset_left = 143.245
 offset_right = 166.245
 offset_bottom = 36.0
-theme_override_fonts/font = ExtResource("1_rosqn")
+theme_override_fonts/font = ExtResource("1_jh0vr")
 theme_override_font_sizes/font_size = 40
+text = "0"
+
+[node name="Gear" type="Control" parent="BottomUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 582.0
+offset_top = 16.0
+offset_right = 621.0
+offset_bottom = 91.0
+
+[node name="Label" type="Label" parent="BottomUI/Gear"]
+layout_mode = 0
+offset_right = 38.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("1_jh0vr")
+theme_override_font_sizes/font_size = 16
+text = "GEAR"
+
+[node name="Gear" type="Label" parent="BottomUI/Gear"]
+layout_mode = 0
+offset_top = 17.0
+offset_right = 38.0
+offset_bottom = 74.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_jh0vr")
+theme_override_font_sizes/font_size = 64
 text = "0"
 
 [node name="ColorRect" type="ColorRect" parent="."]
