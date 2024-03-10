@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c68ld216l04oo"]
 
-[ext_resource type="Texture2D" uid="uid://ci8lxw7l8wosv" path="res://assets/2d_lights_and_shadows_neutral_point_light.webp" id="1_7rmr3"]
-[ext_resource type="Texture2D" uid="uid://gg5l2sd3s5xd" path="res://assets/street-light-top-view-png-1.png" id="2_kv3em"]
+[ext_resource type="Texture2D" uid="uid://ci8lxw7l8wosv" path="res://assets/environment/2d_lights_and_shadows_neutral_point_light.webp" id="1_7rmr3"]
+[ext_resource type="Texture2D" uid="uid://gg5l2sd3s5xd" path="res://assets/environment/street-light-top-view-png-1.png" id="2_sw6m2"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a70ks"]
 polygon = PackedVector2Array(-105, 2, -107, 8, -114, 13, -125, 18, -138, 17, -145, 14, -151, 10, -155, 5, -156, -3, -155, -9, -152, -15, -144, -20, -139, -22, -126, -22, -118, -19, -110, -15, -105, -8, 129, -9, 129, 2)
@@ -18,7 +18,7 @@ texture_scale = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
-texture = ExtResource("2_kv3em")
+texture = ExtResource("2_sw6m2")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 visible = false

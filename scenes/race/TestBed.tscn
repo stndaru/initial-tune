@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://bnrcjxns67w0s"]
 
-[ext_resource type="Texture2D" uid="uid://d1qbfwu6sek5c" path="res://assets/parking_lot.jpg" id="1_1hj4h"]
+[ext_resource type="Texture2D" uid="uid://d1qbfwu6sek5c" path="res://assets/random/parking_lot.jpg" id="1_1hj4h"]
 [ext_resource type="Script" path="res://scenes/race/TestBed.gd" id="1_ukyr4"]
 [ext_resource type="PackedScene" uid="uid://b74v8vsr3880x" path="res://scenes/car/Car.tscn" id="2_nvm56"]
-[ext_resource type="Texture2D" uid="uid://5nfqpvxc4xmr" path="res://assets/lamp_post_vertical.png" id="3_gti5y"]
-[ext_resource type="Texture2D" uid="uid://bnpnd8gkdquvk" path="res://assets/grid.png" id="3_oitgw"]
-[ext_resource type="Texture2D" uid="uid://ci8lxw7l8wosv" path="res://assets/2d_lights_and_shadows_neutral_point_light.webp" id="4_hrxj3"]
+[ext_resource type="Texture2D" uid="uid://5nfqpvxc4xmr" path="res://assets/environment/lamp_post_vertical.png" id="3_gti5y"]
+[ext_resource type="Texture2D" uid="uid://bnpnd8gkdquvk" path="res://assets/random/grid.png" id="3_oitgw"]
+[ext_resource type="Texture2D" uid="uid://ci8lxw7l8wosv" path="res://assets/environment/2d_lights_and_shadows_neutral_point_light.webp" id="4_hrxj3"]
 [ext_resource type="Texture2D" uid="uid://ctw4775k3ldhw" path="res://assets/akinaedt.png" id="4_xh22e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c10b1"]

@@ -13,6 +13,12 @@ var gas_rate = 0.2 # Rate of change for gas
 var delivered_power = 0
 var rpm_rev = 0
 
+var sound_db = 0
+var sound_pitch = 1
+var tween = 0
+var tweenSub = 0
+var tweenBass = 0
+
 # Gearing
 var gear = 0
 var gear_index = 1
@@ -98,6 +104,7 @@ func _physics_process(delta):
 	get_input()
 	apply_friction()
 	calculate_steering(delta)
+	calculate_sound()
 	# Here acceleration is already calculated in get_input() and apply_friction()
 	# As there is no Force in CharacterBody2D, use velocity instead
 	if counter_force.length() > acceleration.length() and velocity.is_zero_approx():
@@ -199,6 +206,13 @@ func process_gear():
 	else:
 		gear_effectivity = -gear_ratio[gear_index]
 	
+func calculate_sound():
+	tween = create_tween()
+	tweenSub = create_tween()
+	tweenBass = create_tween()
+	tween.tween_property($EngineSound, "pitch_scale", clamp((clamp(rpm,1000,7000)/7000), 0.5, 2), 0.2).from_current()
+	tweenSub.tween_property($EngineSoundSub, "pitch_scale", clamp((clamp(rpm,1000,7000)/5500), 0.5, 2), 0.2).from_current()
+	tweenBass.tween_property($EngineSoundBass, "pitch_scale", clamp((clamp(rpm,1000,7000)/3500), 1, 1.5), 0.2).from_current()
 
 func calculate_steering(delta):
 	# Set the Wheel Positions
@@ -246,8 +260,9 @@ func apply_friction():
 func debug_print():
 	print("TORQUE:", snapped(torque, 0.01), \
 			" RPM:", snapped(rpm, 0.01), " SPEED:", snapped(velocity.length(),0.01), \
-			" GEAR:", gear) #, \
-			#" || ", \
+			" GEAR:", gear , \
+			" || ", \
+			" RPMPITCH:", log(clamp(rpm,16,7000))/log(32))
 			#" STRWGT:", steering_weight-3, \
 			#" LOGVEL:", log(velocity.length()), \
 			#" TURN:", turn, \
