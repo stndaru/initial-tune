@@ -1,9 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://bopov2612gay6"]
+[gd_scene load_steps=11 format=3 uid="uid://bopov2612gay6"]
 
 [ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="1_ilpcs"]
 [ext_resource type="Texture2D" uid="uid://coyij5td4nppd" path="res://assets/akinamap.png" id="2_q6y82"]
 [ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_ts0pq"]
 [ext_resource type="Script" path="res://scenes/menu/Button2.gd" id="4_ismxb"]
+[ext_resource type="Texture2D" uid="uid://unu88hgw3vn8" path="res://assets/button/back/BackDefault.png" id="5_jxkyj"]
+[ext_resource type="Script" path="res://scenes/menu/BackButton.gd" id="5_swloa"]
+[ext_resource type="Texture2D" uid="uid://c5gfxyg2vm4kq" path="res://assets/button/back/BackPressed.png" id="6_i8kcd"]
+[ext_resource type="Texture2D" uid="uid://c44h5o54yg7dq" path="res://assets/button/back/BackHover.png" id="7_3qf8u"]
+[ext_resource type="Texture2D" uid="uid://kyxg56plgclg" path="res://assets/button/back/BackDisabled.png" id="8_cqpw2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tkf47"]
 
@@ -87,5 +92,38 @@ offset_right = 669.0
 offset_bottom = 160.0
 text = "TUNE MODE"
 script = ExtResource("4_ismxb")
+
+[node name="BackButton" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = -129.0
+offset_right = 271.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureButton" type="TextureButton" parent="BackButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.5
+offset_top = -50.0
+offset_right = 187.5
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("5_jxkyj")
+texture_pressed = ExtResource("6_i8kcd")
+texture_hover = ExtResource("7_3qf8u")
+texture_disabled = ExtResource("8_cqpw2")
+texture_focused = ExtResource("5_jxkyj")
+script = ExtResource("5_swloa")
 
 [connection signal="pressed" from="Control/Button2" to="Control/Button2" method="_on_pressed"]
