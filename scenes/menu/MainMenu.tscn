@@ -1,0 +1,113 @@
+[gd_scene load_steps=14 format=3 uid="uid://d0tje37sk87ie"]
+
+[ext_resource type="Texture2D" uid="uid://digtop26qc8a6" path="res://assets/button/play/PlayDefault.png" id="1_cyvb1"]
+[ext_resource type="Texture2D" uid="uid://lwji47cv7xmk" path="res://assets/button/play/PlayPressed.png" id="2_s6r1t"]
+[ext_resource type="Texture2D" uid="uid://bwvnx5e5h42nc" path="res://assets/button/play/PlayHover.png" id="3_ljyrq"]
+[ext_resource type="Texture2D" uid="uid://bml5m8d8y3kbl" path="res://assets/button/play/PlayDisabled.png" id="4_3qrwg"]
+[ext_resource type="Texture2D" uid="uid://c7ex56tgkhgm4" path="res://assets/button/exit/ExitDefault.png" id="5_ufgjv"]
+[ext_resource type="Script" path="res://scenes/menu/PlayButton.gd" id="5_xl3f5"]
+[ext_resource type="Texture2D" uid="uid://bdlfjjeucvhny" path="res://assets/button/exit/ExitPressed.png" id="6_bceec"]
+[ext_resource type="Texture2D" uid="uid://bhw2be1xh83oc" path="res://assets/button/exit/ExitHover.png" id="7_xkmcq"]
+[ext_resource type="Texture2D" uid="uid://q4wn4rwoqcsc" path="res://assets/button/exit/ExitDisabled.png" id="8_3cll0"]
+[ext_resource type="Script" path="res://scenes/menu/ExitButton.gd" id="9_4el2e"]
+[ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="10_artsl"]
+[ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="10_wygb3"]
+[ext_resource type="AudioStream" uid="uid://c24dum0ac4lgw" path="res://assets/music/dragostea.mp3" id="11_p5a8d"]
+
+[node name="MainMenu" type="Node"]
+
+[node name="Screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -338.0
+offset_top = -269.0
+offset_right = 338.0
+offset_bottom = 269.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayButton" type="TextureButton" parent="Screen/Control"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 189.0
+offset_right = 622.0
+offset_bottom = 336.0
+texture_normal = ExtResource("1_cyvb1")
+texture_pressed = ExtResource("2_s6r1t")
+texture_hover = ExtResource("3_ljyrq")
+texture_disabled = ExtResource("4_3qrwg")
+texture_focused = ExtResource("1_cyvb1")
+stretch_mode = 5
+script = ExtResource("5_xl3f5")
+
+[node name="ExitButton" type="TextureButton" parent="Screen/Control"]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 333.0
+offset_right = 568.0
+offset_bottom = 433.0
+scale = Vector2(0.8, 0.8)
+texture_normal = ExtResource("5_ufgjv")
+texture_pressed = ExtResource("6_bceec")
+texture_hover = ExtResource("7_xkmcq")
+texture_disabled = ExtResource("8_3cll0")
+texture_focused = ExtResource("5_ufgjv")
+stretch_mode = 3
+script = ExtResource("9_4el2e")
+
+[node name="TextureRect" type="TextureRect" parent="Screen/Control"]
+layout_mode = 0
+offset_left = 234.0
+offset_top = 46.0
+offset_right = 959.0
+offset_bottom = 244.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("10_artsl")
+
+[node name="DateTime" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -114.0
+offset_right = 326.0
+grow_vertical = 0
+
+[node name="Time" type="Label" parent="DateTime"]
+layout_mode = 0
+offset_left = 51.0
+offset_right = 235.0
+offset_bottom = 36.0
+theme_override_fonts/font = ExtResource("10_wygb3")
+theme_override_font_sizes/font_size = 40
+text = "AM 01:32"
+
+[node name="Date" type="Label" parent="DateTime"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 43.0
+offset_right = 304.0
+offset_bottom = 79.0
+theme_override_fonts/font = ExtResource("10_wygb3")
+theme_override_font_sizes/font_size = 40
+text = "APR.18 1990"
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_p5a8d")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="pressed" from="Screen/Control/PlayButton" to="Screen/Control/PlayButton" method="_on_pressed"]
+[connection signal="pressed" from="Screen/Control/ExitButton" to="Screen/Control/ExitButton" method="_on_pressed"]

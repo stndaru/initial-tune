@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwdd1p787jjef"]
+
+[ext_resource type="Script" path="res://scenes/Main.gd" id="1_mjd8c"]
+[ext_resource type="PackedScene" uid="uid://d0tje37sk87ie" path="res://scenes/menu/MainMenu.tscn" id="1_p7r17"]
+[ext_resource type="PackedScene" uid="uid://xs5642fqxff1" path="res://scenes/ShaderVCR.tscn" id="3_qemkg"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_mjd8c")
+
+[node name="MainMenu" parent="." instance=ExtResource("1_p7r17")]
+
+[node name="Shader" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ShaderVCR" parent="Shader" instance=ExtResource("3_qemkg")]

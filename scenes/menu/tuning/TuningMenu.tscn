@@ -1,0 +1,560 @@
+[gd_scene load_steps=14 format=3 uid="uid://bn2aaq6mv2gib"]
+
+[ext_resource type="Texture2D" uid="uid://dvu5axf0fnplj" path="res://assets/silver-shimmery-paper-background.jpg" id="1_uyjpm"]
+[ext_resource type="Script" path="res://scenes/menu/tuning/PowerSlider.gd" id="2_fhi5v"]
+[ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_n6hgr"]
+[ext_resource type="Script" path="res://scenes/menu/tuning/FinalDriveSlider.gd" id="4_i48hs"]
+[ext_resource type="Script" path="res://scenes/menu/tuning/GearOneSlider.gd" id="5_2u5ys"]
+[ext_resource type="Script" path="res://scenes/menu/tuning/GearTwoSlider.gd" id="6_ot60o"]
+[ext_resource type="Script" path="res://scenes/menu/tuning/GearThreeSlider.gd" id="7_ri340"]
+[ext_resource type="Script" path="res://scenes/menu/tuning/GearFourSlider.gd" id="8_gyx37"]
+[ext_resource type="Script" path="res://scenes/menu/tuning/GearFiveSlider.gd" id="9_pom0p"]
+[ext_resource type="Script" path="res://scenes/menu/tuning/BrakeSlider.gd" id="10_eml5p"]
+[ext_resource type="Script" path="res://scenes/menu/tuning/SteeringWeightSlider.gd" id="11_hrpj2"]
+[ext_resource type="Script" path="res://scenes/menu/tuning/WeightSlide.gd" id="12_26w34"]
+[ext_resource type="Script" path="res://scenes/menu/tuning/SaveTuneButton.gd" id="12_meqli"]
+
+[node name="TuningMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 341.0
+offset_bottom = 482.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 2886.0
+offset_bottom = 1623.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_uyjpm")
+stretch_mode = 5
+
+[node name="TuningButton" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 44.0
+offset_right = 304.0
+offset_bottom = 383.0
+theme_override_constants/separation = 0
+
+[node name="PowerSlider" type="Control" parent="Control/TuningButton"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_fhi5v")
+
+[node name="Desc" type="Label" parent="Control/TuningButton/PowerSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.5
+offset_right = 47.0
+offset_bottom = 7.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "POWER"
+
+[node name="Value" type="Label" parent="Control/TuningButton/PowerSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 235.0
+offset_top = -9.0
+offset_right = 282.0
+offset_bottom = 9.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="Slider" type="HSlider" parent="Control/TuningButton/PowerSlider"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -8.0
+offset_right = -54.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="FinalDriveSlider" type="Control" parent="Control/TuningButton"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_i48hs")
+
+[node name="Desc" type="Label" parent="Control/TuningButton/FinalDriveSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.5
+offset_right = 47.0
+offset_bottom = 7.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "FDR"
+
+[node name="Value" type="Label" parent="Control/TuningButton/FinalDriveSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 235.0
+offset_top = -9.0
+offset_right = 282.0
+offset_bottom = 9.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="Slider" type="HSlider" parent="Control/TuningButton/FinalDriveSlider"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -8.0
+offset_right = -54.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="GearOneSlider" type="Control" parent="Control/TuningButton"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("5_2u5ys")
+
+[node name="Desc" type="Label" parent="Control/TuningButton/GearOneSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.5
+offset_right = 47.0
+offset_bottom = 7.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "GR 1"
+
+[node name="Value" type="Label" parent="Control/TuningButton/GearOneSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 235.0
+offset_top = -9.0
+offset_right = 282.0
+offset_bottom = 9.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="Slider" type="HSlider" parent="Control/TuningButton/GearOneSlider"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -8.0
+offset_right = -54.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="GearTwoSlider" type="Control" parent="Control/TuningButton"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("6_ot60o")
+
+[node name="Desc" type="Label" parent="Control/TuningButton/GearTwoSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.5
+offset_right = 47.0
+offset_bottom = 7.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "GR 2"
+
+[node name="Value" type="Label" parent="Control/TuningButton/GearTwoSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 235.0
+offset_top = -9.0
+offset_right = 282.0
+offset_bottom = 9.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="Slider" type="HSlider" parent="Control/TuningButton/GearTwoSlider"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -8.0
+offset_right = -54.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="GearThreeSlider" type="Control" parent="Control/TuningButton"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("7_ri340")
+
+[node name="Desc" type="Label" parent="Control/TuningButton/GearThreeSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.5
+offset_right = 47.0
+offset_bottom = 7.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "GR 3"
+
+[node name="Value" type="Label" parent="Control/TuningButton/GearThreeSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 235.0
+offset_top = -9.0
+offset_right = 282.0
+offset_bottom = 9.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="Slider" type="HSlider" parent="Control/TuningButton/GearThreeSlider"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -8.0
+offset_right = -54.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="GearFourSlider" type="Control" parent="Control/TuningButton"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("8_gyx37")
+
+[node name="Desc" type="Label" parent="Control/TuningButton/GearFourSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.5
+offset_right = 47.0
+offset_bottom = 7.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "GR 4"
+
+[node name="Value" type="Label" parent="Control/TuningButton/GearFourSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 235.0
+offset_top = -9.0
+offset_right = 282.0
+offset_bottom = 9.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="Slider" type="HSlider" parent="Control/TuningButton/GearFourSlider"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -8.0
+offset_right = -54.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="GearFiveSlider" type="Control" parent="Control/TuningButton"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("9_pom0p")
+
+[node name="Desc" type="Label" parent="Control/TuningButton/GearFiveSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.5
+offset_right = 47.0
+offset_bottom = 7.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "GR 5"
+
+[node name="Value" type="Label" parent="Control/TuningButton/GearFiveSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 235.0
+offset_top = -9.0
+offset_right = 282.0
+offset_bottom = 9.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="Slider" type="HSlider" parent="Control/TuningButton/GearFiveSlider"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -8.0
+offset_right = -54.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="BrakeSlider" type="Control" parent="Control/TuningButton"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("10_eml5p")
+
+[node name="Desc" type="Label" parent="Control/TuningButton/BrakeSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.5
+offset_right = 47.0
+offset_bottom = 7.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "BRK"
+
+[node name="Value" type="Label" parent="Control/TuningButton/BrakeSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 235.0
+offset_top = -9.0
+offset_right = 282.0
+offset_bottom = 9.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="Slider" type="HSlider" parent="Control/TuningButton/BrakeSlider"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -8.0
+offset_right = -54.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="SteeringWeightSlider" type="Control" parent="Control/TuningButton"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("11_hrpj2")
+
+[node name="Desc" type="Label" parent="Control/TuningButton/SteeringWeightSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.5
+offset_right = 47.0
+offset_bottom = 7.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "STR
+"
+
+[node name="Value" type="Label" parent="Control/TuningButton/SteeringWeightSlider"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 235.0
+offset_top = -9.0
+offset_right = 282.0
+offset_bottom = 9.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="Slider" type="HSlider" parent="Control/TuningButton/SteeringWeightSlider"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -8.0
+offset_right = -54.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="WeightSlide" type="Control" parent="Control/TuningButton"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("12_26w34")
+
+[node name="Desc" type="Label" parent="Control/TuningButton/WeightSlide"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -7.5
+offset_right = 47.0
+offset_bottom = 7.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "WGT"
+
+[node name="Value" type="Label" parent="Control/TuningButton/WeightSlide"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 235.0
+offset_top = -9.0
+offset_right = 282.0
+offset_bottom = 9.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="Slider" type="HSlider" parent="Control/TuningButton/WeightSlide"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -8.0
+offset_right = -54.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 17.0
+offset_right = 249.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("3_n6hgr")
+theme_override_font_sizes/font_size = 24
+text = "TUNING WINDOW"
+
+[node name="SaveTuneButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -59.0
+offset_top = -54.0
+offset_right = 59.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_n6hgr")
+text = "SAVE TUNE"
+script = ExtResource("12_meqli")
+
+[connection signal="pressed" from="Control/SaveTuneButton" to="Control/SaveTuneButton" method="_on_pressed"]

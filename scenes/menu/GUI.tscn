@@ -1,35 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://be3qey64oy8v4"]
+[gd_scene load_steps=4 format=3 uid="uid://be3qey64oy8v4"]
 
-[ext_resource type="Texture2D" uid="uid://bqmftyomny6sj" path="res://assets/cars/speedometer.png" id="1_3lej6"]
-[ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="1_jh0vr"]
-[ext_resource type="Shader" path="res://shaders/crt.gdshader" id="2_0qlul"]
-[ext_resource type="Texture2D" uid="uid://caydiqq2wr2na" path="res://assets/cars/speedometerneedle.png" id="2_lli0f"]
+[ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="1_krarw"]
+[ext_resource type="Texture2D" uid="uid://bqmftyomny6sj" path="res://assets/cars/speedometer.png" id="2_j6nym"]
+[ext_resource type="Texture2D" uid="uid://caydiqq2wr2na" path="res://assets/cars/speedometerneedle.png" id="3_msohk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7h7tp"]
-shader = ExtResource("2_0qlul")
-shader_parameter/overlay = true
-shader_parameter/scanlines_opacity = 0.074
-shader_parameter/scanlines_width = 0.081
-shader_parameter/grille_opacity = 0.05
-shader_parameter/resolution = Vector2(640, 480)
-shader_parameter/pixelate = true
-shader_parameter/roll = true
-shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 55.82
-shader_parameter/roll_variation = 0.397
-shader_parameter/distort_intensity = 0.002
-shader_parameter/noise_opacity = 0.021
-shader_parameter/noise_speed = 5.0
-shader_parameter/static_noise_intensity = 0.035
-shader_parameter/aberration = 0.01
-shader_parameter/brightness = 1.4
-shader_parameter/discolor = true
-shader_parameter/warp_amount = 0.0
-shader_parameter/clip_warp = false
-shader_parameter/vignette_intensity = 0.4
-shader_parameter/vignette_opacity = 0.5
-
-[node name="Gui" type="CanvasLayer"]
+[node name="GUI" type="CanvasLayer"]
 
 [node name="DateTime" type="Control" parent="."]
 layout_mode = 3
@@ -45,7 +20,7 @@ layout_mode = 0
 offset_left = 51.0
 offset_right = 235.0
 offset_bottom = 36.0
-theme_override_fonts/font = ExtResource("1_jh0vr")
+theme_override_fonts/font = ExtResource("1_krarw")
 theme_override_font_sizes/font_size = 40
 text = "AM 01:32"
 
@@ -55,7 +30,7 @@ offset_left = 51.0
 offset_top = 43.0
 offset_right = 304.0
 offset_bottom = 79.0
-theme_override_fonts/font = ExtResource("1_jh0vr")
+theme_override_fonts/font = ExtResource("1_krarw")
 theme_override_font_sizes/font_size = 40
 text = "APR.18 1990"
 
@@ -84,7 +59,7 @@ layout_mode = 0
 offset_right = 1100.0
 offset_bottom = 400.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_3lej6")
+texture = ExtResource("2_j6nym")
 
 [node name="SpeedMeter" type="TextureRect" parent="BottomUI/Speedometer"]
 layout_mode = 0
@@ -95,7 +70,7 @@ offset_bottom = 124.0
 rotation = -0.296279
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(285, 30)
-texture = ExtResource("2_lli0f")
+texture = ExtResource("3_msohk")
 
 [node name="RpmMeter" type="TextureRect" parent="BottomUI/Speedometer"]
 layout_mode = 0
@@ -106,7 +81,7 @@ offset_bottom = 122.0
 rotation = -0.35249
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(285, 30)
-texture = ExtResource("2_lli0f")
+texture = ExtResource("3_msohk")
 
 [node name="Speed" type="Control" parent="BottomUI"]
 visible = false
@@ -121,7 +96,7 @@ offset_bottom = 76.0
 layout_mode = 0
 offset_right = 138.0
 offset_bottom = 36.0
-theme_override_fonts/font = ExtResource("1_jh0vr")
+theme_override_fonts/font = ExtResource("1_krarw")
 theme_override_font_sizes/font_size = 40
 text = "SPEED:"
 
@@ -130,7 +105,7 @@ layout_mode = 0
 offset_left = 143.245
 offset_right = 166.245
 offset_bottom = 36.0
-theme_override_fonts/font = ExtResource("1_jh0vr")
+theme_override_fonts/font = ExtResource("1_krarw")
 theme_override_font_sizes/font_size = 40
 text = "0"
 
@@ -146,7 +121,7 @@ offset_bottom = 91.0
 layout_mode = 0
 offset_right = 38.0
 offset_bottom = 15.0
-theme_override_fonts/font = ExtResource("1_jh0vr")
+theme_override_fonts/font = ExtResource("1_krarw")
 theme_override_font_sizes/font_size = 16
 text = "GEAR"
 
@@ -155,12 +130,7 @@ layout_mode = 0
 offset_top = 17.0
 offset_right = 38.0
 offset_bottom = 74.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_jh0vr")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_krarw")
 theme_override_font_sizes/font_size = 64
 text = "0"
-
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_7h7tp")
-offset_right = 1920.0
-offset_bottom = 1080.0

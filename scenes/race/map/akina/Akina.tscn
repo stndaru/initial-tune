@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://djfbrooe2nyd2"]
+[gd_scene load_steps=8 format=3 uid="uid://djfbrooe2nyd2"]
 
-[ext_resource type="Script" path="res://scenes/race/TestBed.gd" id="1_pm5uv"]
+[ext_resource type="Script" path="res://scenes/race/map/testbed/TestBed.gd" id="1_pm5uv"]
 [ext_resource type="Texture2D" uid="uid://ctw4775k3ldhw" path="res://assets/akinaedt.png" id="2_kp23o"]
-[ext_resource type="PackedScene" uid="uid://b74v8vsr3880x" path="res://scenes/car/Car.tscn" id="3_wodaf"]
 [ext_resource type="Texture2D" uid="uid://c67ghdwfc505f" path="res://assets/akinafall.png" id="4_re27l"]
 [ext_resource type="PackedScene" uid="uid://c68ld216l04oo" path="res://scenes/race/map/akina/environment/Lamp.tscn" id="4_xsldk"]
 [ext_resource type="AudioStream" uid="uid://bdiqc16qxj0sk" path="res://assets/music/boccherguitarloneliness.mp3" id="7_0spc1"]
@@ -70,8 +69,6 @@ position = Vector2(8500, -17500)
 rotation = -1.5708
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_kp23o")
-
-[node name="Car" parent="." instance=ExtResource("3_wodaf")]
 
 [node name="RightCollisionWall" type="StaticBody2D" parent="."]
 visible = false

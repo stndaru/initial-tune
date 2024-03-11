@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://b74v8vsr3880x"]
 
-[ext_resource type="PackedScene" uid="uid://be3qey64oy8v4" path="res://scenes/GUI.tscn" id="1_vvuxk"]
-[ext_resource type="Script" path="res://scenes/GUI.gd" id="2_r5xpt"]
+[ext_resource type="PackedScene" uid="uid://be3qey64oy8v4" path="res://scenes/menu/GUI.tscn" id="1_vvuxk"]
+[ext_resource type="Script" path="res://scenes/menu/GUI.gd" id="2_r5xpt"]
 [ext_resource type="Script" path="res://scenes/car/FrontLamp.gd" id="2_u10ec"]
 [ext_resource type="Script" path="res://scenes/car/BrakeLamp.gd" id="2_v7xf7"]
 [ext_resource type="Script" path="res://scenes/car/CarPhysics.gd" id="3_dp8ms"]
@@ -16,7 +16,7 @@
 
 [node name="Car" type="Node2D"]
 
-[node name="Gui" parent="." instance=ExtResource("1_vvuxk")]
+[node name="GUI" parent="." instance=ExtResource("1_vvuxk")]
 script = ExtResource("2_r5xpt")
 
 [node name="CarBody" type="CharacterBody2D" parent="."]

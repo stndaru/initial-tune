@@ -23,6 +23,14 @@ var tweenBass = 0
 var gear = 0
 var gear_index = 1
 var gear_shift = ["R" ,"N" ,"1" ,"2" ,"3" ,"4" ,"5"]
+# Gear List Customizeable
+# Final Drive = [3.5,5.5]
+# Gear R = [-3,-2]
+# Gear 1 = [3.5, 2.5]
+# Gear 2 = [2,1]
+# Gear 3 = [1.2, 0.8]
+# Gear 4 = [1, 0.7]
+# Gear 5 = [0.9, 0.6]
 var gear_ratio = [-2.8, 0, 3, 1.5, 1, 0.9, 0.81]
 var gear_effectivity = 0
 var final_drive_ratio = 4.5
@@ -34,19 +42,21 @@ var steer_decay = 1
 # Car Manueverability Data
 var car_length = 85
 var wheel_base = 70  # Distance from front to rear wheel, default 70
+# Steering Angle Customizeable [30,50]
 var steering_angle = 45  # Amount that front wheel turns, in degrees
 var steering_weight = 0
 # Multiplier to control power steering, lower means higher manueverability
-# Recommended range: 0.47-0.53
+# Steering Weight Multiplier Customizeable [0.47-0.53]
 var steering_weight_multiplier = 0.5
+# Weight Customizeable [1.1,1.3]
 var weight = 1.2 # Car Weight
 var rear_wheel = Vector2.ZERO
 var front_wheel = Vector2.ZERO
 var new_heading = Vector2.ZERO
 var new_heading_dot = Vector2.ZERO
-var wheel_diameter = 7
 
 # Car Engine Data
+# Engine Power Customizeable [150,200]
 var engine_power = 175  # Forward acceleration force.
 var acceleration = Vector2.ZERO
 
@@ -58,6 +68,7 @@ var rpm_delay = 0.8 # Delay of rpm following gas input
 var torque = 0
 
 # Car Friction and Drag
+# Friction Customizeable [-0.85,-0.95]
 var counter_force = Vector2.ZERO
 var friction = -0.9
 var friction_force = Vector2.ZERO
@@ -67,6 +78,7 @@ var engine_brake = 0
 var engine_brake_force = Vector2.ZERO
 
 # Reverse and Brake
+# Brake Power Customizeable [-1,-3]
 var brake_power = -2
 var max_speed_reverse = 2500
 
@@ -80,8 +92,8 @@ var traction_slow = 0.7  # Low-speed traction
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
-	wheel_base = (get_node("CarCollision").get_polygon()[19].x - 25) - \
-					get_node("CarCollision").get_polygon()[4].x + 25
+	wheel_base = (get_node("CarCollision").get_polygon()[19].x - 30) - \
+					get_node("CarCollision").get_polygon()[4].x + 30
 	gear = gear_shift[gear_index]
 	rear_wheel = position - transform.x * wheel_base / 2.0
 	front_wheel = position + transform.x * wheel_base / 2.0
@@ -98,7 +110,7 @@ func _input(event):
 		process_gear()
 
 func _physics_process(delta):
-	#debug_print()
+	debug_print()
 	acceleration = Vector2.ZERO
 	counter_force = Vector2.ZERO
 	get_input()
@@ -258,11 +270,19 @@ func apply_friction():
 	counter_force += drag_force + friction_force + engine_brake_force
 
 func debug_print():
-	print("TORQUE:", snapped(torque, 0.01), \
-			" RPM:", snapped(rpm, 0.01), " SPEED:", snapped(velocity.length(),0.01), \
-			" GEAR:", gear , \
-			" || ", \
-			" RPMPITCH:", log(clamp(rpm,16,7000))/log(32))
+	#print("TORQUE:", snapped(torque, 0.01), \
+			#" RPM:", snapped(rpm, 0.01), " SPEED:", snapped(velocity.length(),0.01), \
+			#" GEAR:", gear , \
+			#" || ", \
+	print(" PWR:", engine_power, \
+			" GEAR:", gear_ratio, \
+			" FINAL:", final_drive_ratio, \
+			" ANGL:", steering_angle, \
+			" STRWGT:", steering_weight_multiplier, \
+			" WGT:", weight, \
+			" FRT:", friction, \
+			" BRK:", brake_power)
+			
 			#" STRWGT:", steering_weight-3, \
 			#" LOGVEL:", log(velocity.length()), \
 			#" TURN:", turn, \
