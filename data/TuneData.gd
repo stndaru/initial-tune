@@ -1,6 +1,5 @@
 extends Node
 
-
 # Gear List Customizeable
 # Final Drive = [3.5,5.5]
 # Gear R = [-3,-2]
@@ -65,7 +64,15 @@ var slip_speed = 1200  # Speed where traction is reduced
 var traction_fast = 0.1  # High-speed traction
 var traction_slow = 0.7  # Low-speed traction
 
+var default_tune = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	default_tune = get_node("/root/TuneDataDefault")
 
+func reset_tune():
+	engine_power = default_tune.engine_power
+	gear_ratio = default_tune.gear_ratio
+	final_drive_ratio = default_tune.final_drive_ratio
+	steering_weight_multiplier = default_tune.steering_weight_multiplier
+	brake_power = default_tune.brake_power
+	weight = default_tune.weight

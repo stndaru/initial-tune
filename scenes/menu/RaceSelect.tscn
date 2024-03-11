@@ -4,11 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://coyij5td4nppd" path="res://assets/akinamap.png" id="2_q6y82"]
 [ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_ts0pq"]
 [ext_resource type="Script" path="res://scenes/menu/Button2.gd" id="4_ismxb"]
-[ext_resource type="Texture2D" uid="uid://unu88hgw3vn8" path="res://assets/button/back/BackDefault.png" id="5_jxkyj"]
-[ext_resource type="Script" path="res://scenes/menu/BackButton.gd" id="5_swloa"]
-[ext_resource type="Texture2D" uid="uid://c5gfxyg2vm4kq" path="res://assets/button/back/BackPressed.png" id="6_i8kcd"]
-[ext_resource type="Texture2D" uid="uid://c44h5o54yg7dq" path="res://assets/button/back/BackHover.png" id="7_3qf8u"]
-[ext_resource type="Texture2D" uid="uid://kyxg56plgclg" path="res://assets/button/back/BackDisabled.png" id="8_cqpw2"]
+[ext_resource type="Texture2D" uid="uid://unu88hgw3vn8" path="res://assets/button/back/BackDefault.png" id="5_g1jsp"]
+[ext_resource type="Texture2D" uid="uid://c5gfxyg2vm4kq" path="res://assets/button/back/BackPressed.png" id="6_khjpc"]
+[ext_resource type="Texture2D" uid="uid://c44h5o54yg7dq" path="res://assets/button/back/BackHover.png" id="7_gocvq"]
+[ext_resource type="Texture2D" uid="uid://kyxg56plgclg" path="res://assets/button/back/BackDisabled.png" id="8_lmrm2"]
+[ext_resource type="Script" path="res://scenes/menu/BackButton.gd" id="9_fequa"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tkf47"]
 
@@ -68,13 +68,13 @@ texture = ExtResource("2_q6y82")
 
 [node name="Label" type="Label" parent="Control/Panel"]
 layout_mode = 0
-offset_left = 204.0
+offset_left = 160.0
 offset_top = 253.0
-offset_right = 299.0
+offset_right = 350.0
 offset_bottom = 282.0
 theme_override_fonts/font = ExtResource("3_ts0pq")
 theme_override_font_sizes/font_size = 32
-text = "Akina"
+text = "Map: Akina"
 
 [node name="Button" type="Button" parent="Control"]
 layout_mode = 0
@@ -100,13 +100,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -264.0
-offset_top = -129.0
-offset_right = 271.0
+offset_left = -208.5
+offset_top = -116.0
+offset_right = 208.5
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TextureButton" type="TextureButton" parent="BackButton"]
+[node name="BackButton" type="TextureButton" parent="BackButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -119,11 +119,13 @@ offset_right = 187.5
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("5_jxkyj")
-texture_pressed = ExtResource("6_i8kcd")
-texture_hover = ExtResource("7_3qf8u")
-texture_disabled = ExtResource("8_cqpw2")
-texture_focused = ExtResource("5_jxkyj")
-script = ExtResource("5_swloa")
+texture_normal = ExtResource("5_g1jsp")
+texture_pressed = ExtResource("6_khjpc")
+texture_hover = ExtResource("7_gocvq")
+texture_disabled = ExtResource("8_lmrm2")
+texture_focused = ExtResource("5_g1jsp")
+stretch_mode = 3
+script = ExtResource("9_fequa")
 
 [connection signal="pressed" from="Control/Button2" to="Control/Button2" method="_on_pressed"]
+[connection signal="pressed" from="BackButton/BackButton" to="BackButton/BackButton" method="_on_pressed"]

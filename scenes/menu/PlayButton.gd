@@ -10,7 +10,7 @@ func _process(_delta):
 	pass
 
 func _on_pressed():
-	var race_select = preload("res://scenes/menu/RaceSelect.tscn")
+	var race_select = get_node("/root/GameOption").race_select
 	var race_select_instance = race_select.instantiate()
 	get_tree().get_root().find_child("Screen", true, false).add_child(race_select_instance)
-	$"../..".queue_free()
+	get_tree().get_root().find_child("MainMenuButton", true, false).queue_free()

@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://djfbrooe2nyd2"]
+[gd_scene load_steps=7 format=3 uid="uid://djfbrooe2nyd2"]
 
 [ext_resource type="Script" path="res://scenes/race/map/testbed/TestBed.gd" id="1_pm5uv"]
 [ext_resource type="Texture2D" uid="uid://ctw4775k3ldhw" path="res://assets/akinaedt.png" id="2_kp23o"]
 [ext_resource type="Texture2D" uid="uid://c67ghdwfc505f" path="res://assets/akinafall.png" id="4_re27l"]
 [ext_resource type="PackedScene" uid="uid://c68ld216l04oo" path="res://scenes/race/map/akina/environment/Lamp.tscn" id="4_xsldk"]
-[ext_resource type="AudioStream" uid="uid://bdiqc16qxj0sk" path="res://assets/music/boccherguitarloneliness.mp3" id="7_0spc1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4v41d"]
 texture = ExtResource("4_re27l")
@@ -217,8 +216,3 @@ rotation = -1.58301
 [node name="Lamp20" parent="Lamps" instance=ExtResource("4_xsldk")]
 position = Vector2(15793, -35798)
 rotation = -1.58301
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_0spc1")
-volume_db = -5.0
-autoplay = true

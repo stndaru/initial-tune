@@ -110,7 +110,7 @@ func _input(event):
 		process_gear()
 
 func _physics_process(delta):
-	debug_print()
+	#debug_print()
 	acceleration = Vector2.ZERO
 	counter_force = Vector2.ZERO
 	get_input()
