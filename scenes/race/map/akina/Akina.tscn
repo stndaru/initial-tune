@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://djfbrooe2nyd2"]
+[gd_scene load_steps=10 format=3 uid="uid://djfbrooe2nyd2"]
 
 [ext_resource type="Script" path="res://scenes/race/map/akina/Akina.gd" id="1_dabj0"]
 [ext_resource type="Texture2D" uid="uid://ctw4775k3ldhw" path="res://assets/akinaedt.png" id="2_kp23o"]
@@ -49,6 +49,9 @@ texture_region_size = Vector2i(128, 128)
 [sub_resource type="TileSet" id="TileSet_o8jld"]
 tile_size = Vector2i(128, 128)
 sources/2 = SubResource("TileSetAtlasSource_4v41d")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwne3"]
+size = Vector2(258, 758)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q6cqn"]
 size = Vector2(72, 520)
@@ -105,6 +108,33 @@ polygon = PackedVector2Array(5810, -32590, 5460, -32590, 4987, -32612, 4470, -32
 
 [node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="RightCollisionWall"]
 polygon = PackedVector2Array(6107, -35284, 6685, -35352, 7109, -35398, 7512, -35423, 7865, -35438, 8194, -35439, 18178, -35388, 19315, -35161, 19353, -34845)
+
+[node name="EndMaps" type="StaticBody2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndMaps"]
+position = Vector2(19425, -35463)
+shape = SubResource("RectangleShape2D_xwne3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="EndMaps"]
+position = Vector2(7581, -27541)
+rotation = 0.425294
+shape = SubResource("RectangleShape2D_xwne3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="EndMaps"]
+position = Vector2(6703, -27253)
+rotation = 0.269349
+shape = SubResource("RectangleShape2D_xwne3")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="EndMaps"]
+position = Vector2(7149, -8988)
+rotation = 1.41826
+shape = SubResource("RectangleShape2D_xwne3")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="EndMaps"]
+position = Vector2(-2411, 511)
+rotation = -0.0807216
+shape = SubResource("RectangleShape2D_xwne3")
 
 [node name="LeftCollisionWall" type="StaticBody2D" parent="."]
 visible = false
@@ -222,7 +252,7 @@ position = Vector2(15793, -35798)
 rotation = -1.58301
 
 [node name="FinishLine" type="Area2D" parent="."]
-position = Vector2(2864, -185)
+position = Vector2(15291, -35747)
 collision_layer = 2
 script = ExtResource("5_2de58")
 
