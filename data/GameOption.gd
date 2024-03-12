@@ -26,3 +26,4 @@ func set_music(music_data):
 	elif music_data == "boccher":
 		get_tree().get_root().get_node("Main").get_node("Music").stream = boccher
 	get_tree().get_root().get_node("Main").get_node("Music").play()
+	

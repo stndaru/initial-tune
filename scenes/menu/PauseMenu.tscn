@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0dh34m0wk1vb"]
+[gd_scene load_steps=18 format=3 uid="uid://c0dh34m0wk1vb"]
 
 [ext_resource type="Script" path="res://scenes/menu/PauseMenu.gd" id="1_w0u61"]
 [ext_resource type="Texture2D" uid="uid://bjq6ry8pd32kq" path="res://assets/button/resume/ResumeDefault.png" id="2_pjdnp"]
@@ -12,6 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://bhw2be1xh83oc" path="res://assets/button/exit/ExitHover.png" id="9_ogjpi"]
 [ext_resource type="Texture2D" uid="uid://q4wn4rwoqcsc" path="res://assets/button/exit/ExitDisabled.png" id="10_7eucw"]
 [ext_resource type="Script" path="res://scenes/menu/ExitRaceButton.gd" id="11_ct67o"]
+[ext_resource type="Texture2D" uid="uid://dr73q7gm08f3y" path="res://assets/button/reset/ResetDefault.png" id="12_34t3r"]
+[ext_resource type="Texture2D" uid="uid://cabl23jofo70v" path="res://assets/button/reset/ResetPressed.png" id="13_dkxbc"]
+[ext_resource type="Texture2D" uid="uid://dyeuutb5afmdr" path="res://assets/button/reset/ResetHover.png" id="14_ry0s7"]
+[ext_resource type="Texture2D" uid="uid://e82gf0kv5gqj" path="res://assets/button/reset/ResetDisabled.png" id="15_2p5vb"]
+[ext_resource type="Script" path="res://scenes/menu/ResetButton.gd" id="16_mdh8d"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2
@@ -54,9 +59,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -238.5
-offset_top = -122.0
+offset_top = -167.0
 offset_right = 238.5
-offset_bottom = -22.0
+offset_bottom = -67.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("2_pjdnp")
@@ -74,9 +79,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -187.5
-offset_top = 1.0
+offset_top = 62.0
 offset_right = 187.5
-offset_bottom = 101.0
+offset_bottom = 162.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("7_utxye")
@@ -85,6 +90,19 @@ texture_hover = ExtResource("9_ogjpi")
 texture_disabled = ExtResource("10_7eucw")
 texture_focused = ExtResource("7_utxye")
 script = ExtResource("11_ct67o")
+
+[node name="ResetButton" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 133.0
+offset_right = 614.0
+offset_bottom = 233.0
+texture_normal = ExtResource("12_34t3r")
+texture_pressed = ExtResource("13_dkxbc")
+texture_hover = ExtResource("14_ry0s7")
+texture_disabled = ExtResource("15_2p5vb")
+texture_focused = ExtResource("12_34t3r")
+script = ExtResource("16_mdh8d")
 
 [node name="ShaderVCR" parent="." instance=ExtResource("6_8q444")]
 layout_mode = 0
@@ -96,3 +114,4 @@ grow_vertical = 1
 
 [connection signal="pressed" from="Control/ResumeButton" to="Control/ResumeButton" method="_on_pressed"]
 [connection signal="pressed" from="Control/ExitRaceButton" to="Control/ExitRaceButton" method="_on_pressed"]
+[connection signal="pressed" from="Control/ResetButton" to="Control/ResetButton" method="_on_pressed"]

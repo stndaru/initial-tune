@@ -4,6 +4,7 @@ extends CharacterBody2D
 var type_circ = 0
 var temp_speed = 0
 var is_mouse_and_keyboard = true
+var enabled_input = true
 
 # General Default Value
 var turn = 0 # Rate at which steer angle increases
@@ -127,7 +128,7 @@ func _physics_process(delta):
 
 func get_input():
 	# Car Steering Wheel Data, Higher Turn -> Steering Wheel Turned More
-	if Input.is_action_pressed("ui_left") || Input.is_action_pressed("ui_right"):
+	if enabled_input and Input.is_action_pressed("ui_left") || Input.is_action_pressed("ui_right"):
 		steering_weight = clamp(log(velocity.length()), 0, 99) * steering_weight_multiplier
 		if is_mouse_and_keyboard:
 			if Input.is_action_pressed("ui_right"):
@@ -165,7 +166,7 @@ func get_input():
 		steer_angle = move_toward(steer_angle, 0, steer_decay+(steer_decay*steering_weight_multiplier))
 		turn = move_toward(turn, 0, steer_decay+(steer_decay*steering_weight_multiplier))
 		
-	if Input.is_action_pressed("ui_up"):
+	if enabled_input and Input.is_action_pressed("ui_up"):
 		if is_mouse_and_keyboard:
 			gas = clamp(gas + gas_rate, 0, 1)
 		else:
@@ -176,7 +177,7 @@ func get_input():
 	
 	if gear_index == 1:
 		# Revving system which increase RPM during neutral
-		if Input.is_action_pressed("ui_up"):
+		if enabled_input and Input.is_action_pressed("ui_up"):
 			rpm_rev = clamp(rpm_rev + 0.1,0,1)
 			rpm = clamp(_cubic_bezier(Vector2(0,0), Vector2(0.54,0.33), Vector2(0.41,1.35), \
 									Vector2(1,1), rpm_rev).y, 0.2, 1) * max_rpm
@@ -199,7 +200,7 @@ func get_input():
 					Vector2(0.93,0.05), Vector2(0.76,0.75), Vector2(1,1), rpm/max_rpm).y)
 		acceleration = transform.x * torque
 	
-	if Input.is_action_pressed("ui_down"):
+	if enabled_input and Input.is_action_pressed("ui_down"):
 		if is_mouse_and_keyboard:
 			counter_force += velocity * brake_power/clamp(log(velocity.length())-3,0.1,2)
 		else:
@@ -268,6 +269,20 @@ func apply_friction():
 	
 	# Flong += Frr + Fdrag
 	counter_force += drag_force + friction_force + engine_brake_force
+	
+func reset_state():
+	position = Vector2(0,0)
+	gear_index = 1
+	gear = gear_shift[gear_index]
+	process_gear()
+	gas = 0
+	turn = 0
+	acceleration = Vector2.ZERO
+	counter_force = Vector2.ZERO
+	steer_angle = 0
+	torque = 0
+	velocity = Vector2.ZERO
+	rotation = 0
 
 func debug_print():
 	#print("TORQUE:", snapped(torque, 0.01), \
@@ -281,7 +296,8 @@ func debug_print():
 			" STRWGT:", steering_weight_multiplier, \
 			" WGT:", weight, \
 			" FRT:", friction, \
-			" BRK:", brake_power)
+			" BRK:", brake_power, \
+			" ROT:", rotation)
 			
 			#" STRWGT:", steering_weight-3, \
 			#" LOGVEL:", log(velocity.length()), \

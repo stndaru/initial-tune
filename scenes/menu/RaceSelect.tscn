@@ -1,14 +1,27 @@
-[gd_scene load_steps=11 format=3 uid="uid://bopov2612gay6"]
+[gd_scene load_steps=24 format=3 uid="uid://bopov2612gay6"]
 
 [ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="1_ilpcs"]
 [ext_resource type="Texture2D" uid="uid://coyij5td4nppd" path="res://assets/akinamap.png" id="2_q6y82"]
 [ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_ts0pq"]
-[ext_resource type="Script" path="res://scenes/menu/Button2.gd" id="4_ismxb"]
+[ext_resource type="Script" path="res://scenes/menu/TuneModeButton.gd" id="4_cyhkf"]
 [ext_resource type="Texture2D" uid="uid://unu88hgw3vn8" path="res://assets/button/back/BackDefault.png" id="5_g1jsp"]
+[ext_resource type="Texture2D" uid="uid://d028uk1plvm44" path="res://assets/button/resettune/ResetDefault.png" id="5_srbyw"]
 [ext_resource type="Texture2D" uid="uid://c5gfxyg2vm4kq" path="res://assets/button/back/BackPressed.png" id="6_khjpc"]
+[ext_resource type="Texture2D" uid="uid://bm3rjxx1obtkc" path="res://assets/button/resettune/ResetPressed.png" id="6_x6tf0"]
 [ext_resource type="Texture2D" uid="uid://c44h5o54yg7dq" path="res://assets/button/back/BackHover.png" id="7_gocvq"]
+[ext_resource type="Texture2D" uid="uid://deo0eutw8d8tg" path="res://assets/button/resettune/ResetHover.png" id="7_gyk0b"]
+[ext_resource type="Script" path="res://scenes/menu/TimeAttackButton.gd" id="8_8cogv"]
 [ext_resource type="Texture2D" uid="uid://kyxg56plgclg" path="res://assets/button/back/BackDisabled.png" id="8_lmrm2"]
+[ext_resource type="Texture2D" uid="uid://kps05ee8gsrb" path="res://assets/button/resettune/ResetDisabled.png" id="8_y8e33"]
+[ext_resource type="Texture2D" uid="uid://bapunknuspxue" path="res://assets/button/tunemode/TuneDefault.png" id="9_5bnqx"]
 [ext_resource type="Script" path="res://scenes/menu/BackButton.gd" id="9_fequa"]
+[ext_resource type="Texture2D" uid="uid://b3kc8wxk5uw7g" path="res://assets/button/tunemode/TunePressed.png" id="10_6u8jt"]
+[ext_resource type="Texture2D" uid="uid://eb8a40nxwef7" path="res://assets/button/tunemode/TuneHover.png" id="11_1xln3"]
+[ext_resource type="Texture2D" uid="uid://cw520wxv5a6i5" path="res://assets/button/tunemode/TuneDisabled.png" id="12_l7inc"]
+[ext_resource type="Texture2D" uid="uid://ubgr6rofow5n" path="res://assets/button/timeattack/TimeAttackDefault.png" id="13_17lhj"]
+[ext_resource type="Texture2D" uid="uid://73pbeyb0dcoc" path="res://assets/button/timeattack/TimeAttackPressed.png" id="14_e6jpt"]
+[ext_resource type="Texture2D" uid="uid://bliirryk26xgy" path="res://assets/button/timeattack/TimeAttackHover.png" id="15_2hdg5"]
+[ext_resource type="Texture2D" uid="uid://bpfjqyif0bktp" path="res://assets/button/timeattack/TimeAttackDisabled.png" id="16_arw8o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tkf47"]
 
@@ -76,22 +89,51 @@ theme_override_fonts/font = ExtResource("3_ts0pq")
 theme_override_font_sizes/font_size = 32
 text = "Map: Akina"
 
-[node name="Button" type="Button" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
-offset_left = 585.0
-offset_top = 55.0
-offset_right = 672.0
-offset_bottom = 96.0
-text = "PLAY"
+offset_left = 507.0
+offset_top = -57.0
+offset_right = 1136.0
+offset_bottom = 295.0
 
-[node name="Button2" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 582.0
-offset_top = 119.0
-offset_right = 669.0
-offset_bottom = 160.0
-text = "TUNE MODE"
-script = ExtResource("4_ismxb")
+[node name="Gamemode" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ts0pq")
+theme_override_font_sizes/font_size = 20
+text = "GAMEMODE"
+
+[node name="TimeAttackButton" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("13_17lhj")
+texture_pressed = ExtResource("14_e6jpt")
+texture_hover = ExtResource("15_2hdg5")
+texture_disabled = ExtResource("16_arw8o")
+texture_focused = ExtResource("13_17lhj")
+script = ExtResource("8_8cogv")
+
+[node name="Tune" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ts0pq")
+theme_override_font_sizes/font_size = 20
+text = "TUNING"
+
+[node name="TuneModeButton" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("9_5bnqx")
+texture_pressed = ExtResource("10_6u8jt")
+texture_hover = ExtResource("11_1xln3")
+texture_disabled = ExtResource("12_l7inc")
+texture_focused = ExtResource("9_5bnqx")
+script = ExtResource("4_cyhkf")
+
+[node name="ResetTuneButton" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("5_srbyw")
+texture_pressed = ExtResource("6_x6tf0")
+texture_hover = ExtResource("7_gyk0b")
+texture_disabled = ExtResource("8_y8e33")
+texture_focused = ExtResource("5_srbyw")
 
 [node name="BackButton" type="Control" parent="."]
 layout_mode = 1
@@ -113,12 +155,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -187.5
-offset_top = -50.0
-offset_right = 187.5
-offset_bottom = 50.0
+offset_left = -96.0
+offset_top = -32.0
+offset_right = 279.0
+offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("5_g1jsp")
 texture_pressed = ExtResource("6_khjpc")
 texture_hover = ExtResource("7_gocvq")
@@ -127,5 +170,6 @@ texture_focused = ExtResource("5_g1jsp")
 stretch_mode = 3
 script = ExtResource("9_fequa")
 
-[connection signal="pressed" from="Control/Button2" to="Control/Button2" method="_on_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/TimeAttackButton" to="Control/VBoxContainer/TimeAttackButton" method="_on_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/TuneModeButton" to="Control/VBoxContainer/TuneModeButton" method="_on_pressed"]
 [connection signal="pressed" from="BackButton/BackButton" to="BackButton/BackButton" method="_on_pressed"]

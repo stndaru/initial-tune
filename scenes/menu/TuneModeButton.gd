@@ -1,4 +1,4 @@
-extends Button
+extends TextureButton
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,6 +21,7 @@ func _on_pressed():
 	
 	car_instance.get_node("GUI").add_child(tuning_menu_instance)
 	map_instance.add_child(car_instance)
+	map_instance.gamemode = "Tuning"
 	
 	#get_tree().get_root().get_node("Main").get_node("MainMenu").get_node("BGM").stop()
 	get_tree().get_root().get_node("Main").get_node("MainMenu").queue_free()

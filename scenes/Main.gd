@@ -15,7 +15,7 @@ func _ready():
 	get_node("/root/GameOption").set_music("dragostea")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 	#time += delta
 	#print(get_tree().get_root().find_child("Shader", true, false).get_children(), time)

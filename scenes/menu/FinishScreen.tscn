@@ -1,0 +1,125 @@
+[gd_scene load_steps=13 format=3 uid="uid://jyy28nyvapv7"]
+
+[ext_resource type="Texture2D" uid="uid://c7ex56tgkhgm4" path="res://assets/button/exit/ExitDefault.png" id="7_d3jw5"]
+[ext_resource type="Texture2D" uid="uid://bdlfjjeucvhny" path="res://assets/button/exit/ExitPressed.png" id="8_lvhkv"]
+[ext_resource type="Texture2D" uid="uid://bhw2be1xh83oc" path="res://assets/button/exit/ExitHover.png" id="9_lya2o"]
+[ext_resource type="Texture2D" uid="uid://q4wn4rwoqcsc" path="res://assets/button/exit/ExitDisabled.png" id="10_r65wu"]
+[ext_resource type="Script" path="res://scenes/menu/ExitRaceButton.gd" id="11_f3ja5"]
+[ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="11_o1ugy"]
+[ext_resource type="Texture2D" uid="uid://dr73q7gm08f3y" path="res://assets/button/reset/ResetDefault.png" id="12_jqi0x"]
+[ext_resource type="Texture2D" uid="uid://cabl23jofo70v" path="res://assets/button/reset/ResetPressed.png" id="13_j04ya"]
+[ext_resource type="Texture2D" uid="uid://dyeuutb5afmdr" path="res://assets/button/reset/ResetHover.png" id="14_5dw7e"]
+[ext_resource type="Texture2D" uid="uid://e82gf0kv5gqj" path="res://assets/button/reset/ResetDisabled.png" id="15_adqf5"]
+[ext_resource type="Script" path="res://scenes/menu/ResetButton.gd" id="16_qw501"]
+[ext_resource type="PackedScene" uid="uid://xs5642fqxff1" path="res://scenes/ShaderVCR.tscn" id="17_jcdr6"]
+
+[node name="FinishScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.490196)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -370.0
+offset_top = -187.0
+offset_right = 370.0
+offset_bottom = 187.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExitRaceButton" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 41.0
+offset_top = 108.0
+offset_right = 416.0
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("7_d3jw5")
+texture_pressed = ExtResource("8_lvhkv")
+texture_hover = ExtResource("9_lya2o")
+texture_disabled = ExtResource("10_r65wu")
+texture_focused = ExtResource("7_d3jw5")
+script = ExtResource("11_f3ja5")
+
+[node name="ResetButton" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = -67.0
+offset_top = 295.0
+offset_right = 410.0
+offset_bottom = 395.0
+texture_normal = ExtResource("12_jqi0x")
+texture_pressed = ExtResource("13_j04ya")
+texture_hover = ExtResource("14_5dw7e")
+texture_disabled = ExtResource("15_adqf5")
+texture_focused = ExtResource("12_jqi0x")
+script = ExtResource("16_qw501")
+
+[node name="Time" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -95.0
+offset_right = 37.5
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("11_o1ugy")
+theme_override_font_sizes/font_size = 128
+text = "0"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -208.0
+offset_right = 190.0
+offset_bottom = -151.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("11_o1ugy")
+theme_override_font_sizes/font_size = 64
+text = "Your Time:"
+horizontal_alignment = 1
+
+[node name="ShaderVCR" parent="." instance=ExtResource("17_jcdr6")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[connection signal="pressed" from="Control/ExitRaceButton" to="Control/ExitRaceButton" method="_on_pressed"]
+[connection signal="pressed" from="Control/ResetButton" to="Control/ResetButton" method="_on_pressed"]
