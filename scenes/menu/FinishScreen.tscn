@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://jyy28nyvapv7"]
+[gd_scene load_steps=14 format=3 uid="uid://jyy28nyvapv7"]
 
+[ext_resource type="Script" path="res://scenes/menu/FinishScreen.gd" id="1_6e0hf"]
 [ext_resource type="Texture2D" uid="uid://c7ex56tgkhgm4" path="res://assets/button/exit/ExitDefault.png" id="7_d3jw5"]
 [ext_resource type="Texture2D" uid="uid://bdlfjjeucvhny" path="res://assets/button/exit/ExitPressed.png" id="8_lvhkv"]
 [ext_resource type="Texture2D" uid="uid://bhw2be1xh83oc" path="res://assets/button/exit/ExitHover.png" id="9_lya2o"]
@@ -20,6 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6e0hf")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

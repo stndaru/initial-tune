@@ -50,8 +50,10 @@ func _on_finish_line_body_entered(body):
 		if body.name == "CarBody":
 			finished = true
 			body.enabled_input = false
+			var finish_screen_instance = finish_screen.instantiate()
+			finish_screen_instance.set_gamemode(gamemode)
 			get_node("Car").get_node("GUI").get_node("Stopwatch").stop()
-			get_node("Car").get_node("GUI").add_child(finish_screen.instantiate())
+			get_node("Car").get_node("GUI").add_child(finish_screen_instance)
 
 func _on_start_timer_timeout():
 	get_node("Car").get_node("GUI").get_node("Stopwatch").start()
