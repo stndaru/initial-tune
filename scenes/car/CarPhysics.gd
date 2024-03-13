@@ -102,6 +102,10 @@ func _ready():
 	traction = traction_slow
 	new_heading_dot = new_heading.dot(velocity.normalized())
 	
+	$EngineSound.volume_db += (get_node("/root/GameOption").get_volume()/2)
+	$EngineSoundSub.volume_db += (get_node("/root/GameOption").get_volume()/2)
+	$EngineSoundBass.volume_db += (get_node("/root/GameOption").get_volume()/2)
+	
 func _input(event):
 	if event.is_action_pressed("ui_shift_up") || event.is_action_pressed("ui_shift_down"):
 		if event.is_action_pressed("ui_shift_up"):
@@ -111,7 +115,7 @@ func _input(event):
 		process_gear()
 
 func _physics_process(delta):
-	debug_print()
+	#debug_print()
 	acceleration = Vector2.ZERO
 	counter_force = Vector2.ZERO
 	get_input()

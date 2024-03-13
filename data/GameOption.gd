@@ -27,3 +27,8 @@ func set_music(music_data):
 		get_tree().get_root().get_node("Main").get_node("Music").stream = boccher
 	get_tree().get_root().get_node("Main").get_node("Music").play()
 	
+func set_volume(volume):
+	get_tree().get_root().get_node("Main").get_node("Music").volume_db = volume
+
+func get_volume():
+	return get_tree().get_root().get_node("Main").get_node("Music").volume_db

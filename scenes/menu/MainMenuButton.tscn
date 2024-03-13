@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqnx7b6so2hdh"]
+[gd_scene load_steps=14 format=3 uid="uid://dqnx7b6so2hdh"]
 
 [ext_resource type="Texture2D" uid="uid://digtop26qc8a6" path="res://assets/button/play/PlayDefault.png" id="1_8d71h"]
 [ext_resource type="Texture2D" uid="uid://lwji47cv7xmk" path="res://assets/button/play/PlayPressed.png" id="2_g5fkj"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://q4wn4rwoqcsc" path="res://assets/button/exit/ExitDisabled.png" id="9_8fblf"]
 [ext_resource type="Script" path="res://scenes/menu/ExitButton.gd" id="10_6ky3w"]
 [ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="11_2ojuy"]
+[ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="12_qnw1x"]
+[ext_resource type="Script" path="res://scenes/menu/VolumeControl.gd" id="12_r4t8p"]
 
 [node name="MainMenuButton" type="Control"]
 layout_mode = 3
@@ -72,5 +74,58 @@ offset_bottom = 244.0
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("11_2ojuy")
 
+[node name="VolumeControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -217.0
+offset_top = -244.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("12_r4t8p")
+
+[node name="VolumeSlider" type="VSlider" parent="VolumeControl"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 67.0
+offset_right = 110.0
+offset_bottom = 154.0
+min_value = -40.0
+max_value = 5.0
+
+[node name="SetVolumeButton" type="Button" parent="VolumeControl"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 165.0
+offset_right = 168.0
+offset_bottom = 202.0
+theme_override_fonts/font = ExtResource("12_qnw1x")
+text = "SET VOLUME"
+
+[node name="VolumeLabel" type="Label" parent="VolumeControl"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 28.0
+offset_right = 143.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("12_qnw1x")
+theme_override_font_sizes/font_size = 24
+text = "VOLUME"
+horizontal_alignment = 1
+
+[node name="VolumeValueLabel" type="Label" parent="VolumeControl"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 105.0
+offset_right = 178.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("12_qnw1x")
+theme_override_font_sizes/font_size = 16
+text = "0"
+
 [connection signal="pressed" from="Control/PlayButton" to="Control/PlayButton" method="_on_pressed"]
 [connection signal="pressed" from="Control/ExitButton" to="Control/ExitButton" method="_on_pressed"]
+[connection signal="pressed" from="VolumeControl/SetVolumeButton" to="VolumeControl" method="_on_set_volume_button_pressed"]
