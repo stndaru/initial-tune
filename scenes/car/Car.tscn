@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b74v8vsr3880x"]
+[gd_scene load_steps=15 format=3 uid="uid://b74v8vsr3880x"]
 
 [ext_resource type="PackedScene" uid="uid://be3qey64oy8v4" path="res://scenes/menu/GUI.tscn" id="1_vvuxk"]
 [ext_resource type="Script" path="res://scenes/menu/GUI.gd" id="2_r5xpt"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://enfpn6stifav" path="res://assets/sounds/corollahp.wav" id="11_oudsg"]
 [ext_resource type="AudioStream" uid="uid://tmamdxniw0lx" path="res://assets/sounds/corollahp2.wav" id="12_cdg53"]
 [ext_resource type="AudioStream" uid="uid://bq5vlwdbhge70" path="res://assets/sounds/corollalp.wav" id="13_teawb"]
+[ext_resource type="AudioStream" uid="uid://cb17wlksyhx0c" path="res://assets/sounds/heartbeat-sound-effect-111218.mp3" id="14_5d055"]
 
 [node name="Car" type="Node2D"]
 
@@ -103,3 +104,8 @@ autoplay = true
 [node name="EngineSoundBass" type="AudioStreamPlayer2D" parent="CarBody"]
 stream = ExtResource("13_teawb")
 autoplay = true
+
+[node name="Heartbeat" type="AudioStreamPlayer2D" parent="CarBody"]
+stream = ExtResource("14_5d055")
+volume_db = 10.0
+pitch_scale = 0.8

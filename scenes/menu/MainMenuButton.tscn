@@ -94,7 +94,7 @@ offset_top = 67.0
 offset_right = 110.0
 offset_bottom = 154.0
 min_value = -40.0
-max_value = 5.0
+max_value = 0.0
 
 [node name="SetVolumeButton" type="Button" parent="VolumeControl"]
 layout_mode = 0

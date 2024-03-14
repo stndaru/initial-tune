@@ -12,7 +12,7 @@ func _ready():
 	
 	main_menu_instance.add_child(main_menu_button_instance)
 	get_tree().get_root().get_node("Main").add_child(main_menu_instance)
-	get_node("/root/GameOption").set_music("dragostea")
+	get_node("/root/GameOption").set_music("Dragostea Din Tei")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

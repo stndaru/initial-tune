@@ -5,6 +5,7 @@ var type_circ = 0
 var temp_speed = 0
 var is_mouse_and_keyboard = true
 var enabled_input = true
+var light_switch = true
 
 # General Default Value
 var turn = 0 # Rate at which steer angle increases
@@ -102,9 +103,10 @@ func _ready():
 	traction = traction_slow
 	new_heading_dot = new_heading.dot(velocity.normalized())
 	
-	$EngineSound.volume_db += (get_node("/root/GameOption").get_volume()/2)
-	$EngineSoundSub.volume_db += (get_node("/root/GameOption").get_volume()/2)
-	$EngineSoundBass.volume_db += (get_node("/root/GameOption").get_volume()/2)
+	$EngineSound.volume_db += (get_node("/root/GameOption").get_volume())
+	$EngineSoundSub.volume_db += (get_node("/root/GameOption").get_volume())
+	$EngineSoundBass.volume_db += (get_node("/root/GameOption").get_volume())
+	$Heartbeat.volume_db += (get_node("/root/GameOption").get_volume())
 	
 func _input(event):
 	if event.is_action_pressed("ui_shift_up") || event.is_action_pressed("ui_shift_down"):
@@ -113,6 +115,23 @@ func _input(event):
 		elif event.is_action_pressed("ui_shift_down"):
 			gear_index = clamp(gear_index - 1, 0, gear_shift.size()-1)
 		process_gear()
+	if event.is_action_pressed("ui_toggle_light"):
+		if light_switch:
+			$FrontLamp.switch_light_off()
+			light_switch = false
+			get_node("/root/GameOption").set_volume(get_node("/root/GameOption").get_volume() - 30)
+			$EngineSound.volume_db += 5
+			$EngineSoundSub.volume_db += 5
+			$EngineSoundBass.volume_db += 5
+			$Heartbeat.play()
+		else:
+			$FrontLamp.switch_light_on()
+			light_switch = true
+			get_node("/root/GameOption").set_volume(get_node("/root/GameOption").get_volume() + 30)
+			$EngineSound.volume_db -= 5
+			$EngineSoundSub.volume_db -= 5
+			$EngineSoundBass.volume_db -= 5
+			$Heartbeat.stop()
 
 func _physics_process(delta):
 	#debug_print()

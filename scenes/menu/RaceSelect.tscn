@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bopov2612gay6"]
+[gd_scene load_steps=25 format=3 uid="uid://bopov2612gay6"]
 
 [ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="1_ilpcs"]
 [ext_resource type="Texture2D" uid="uid://coyij5td4nppd" path="res://assets/akinamap.png" id="2_q6y82"]
@@ -24,6 +24,16 @@
 [ext_resource type="Texture2D" uid="uid://bpfjqyif0bktp" path="res://assets/button/timeattack/TimeAttackDisabled.png" id="16_arw8o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tkf47"]
+
+[sub_resource type="Theme" id="Theme_x1oxl"]
+Button/fonts/font = ExtResource("3_ts0pq")
+Fonts/fonts/large = ExtResource("3_ts0pq")
+Fonts/fonts/normal = ExtResource("3_ts0pq")
+ItemList/fonts/font = ExtResource("3_ts0pq")
+MenuButton/fonts/font = ExtResource("3_ts0pq")
+OptionButton/fonts/font = ExtResource("3_ts0pq")
+PopupMenu/fonts/font = ExtResource("3_ts0pq")
+PopupMenu/fonts/font_separator = ExtResource("3_ts0pq")
 
 [node name="RaceSelect" type="Control"]
 layout_mode = 3
@@ -169,6 +179,59 @@ texture_disabled = ExtResource("8_lmrm2")
 texture_focused = ExtResource("5_g1jsp")
 stretch_mode = 3
 script = ExtResource("9_fequa")
+
+[node name="Additional" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -531.0
+offset_bottom = 72.0
+grow_horizontal = 0
+
+[node name="MusicSelect" type="Control" parent="Additional"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -355.0
+offset_top = -34.0
+offset_right = -55.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MusicOption" type="OptionButton" parent="Additional/MusicSelect"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 1.0
+offset_right = 301.0
+offset_bottom = 32.0
+theme = SubResource("Theme_x1oxl")
+theme_override_fonts/font = ExtResource("3_ts0pq")
+item_count = 5
+selected = 0
+allow_reselect = true
+popup/item_0/text = "Guitar Loneliness"
+popup/item_0/id = 0
+popup/item_1/text = "DOTA"
+popup/item_1/id = 1
+popup/item_2/text = "Dragostea Din Tei"
+popup/item_2/id = 2
+popup/item_3/text = "Moonlight Shadow"
+popup/item_3/id = 3
+popup/item_4/text = "Rockefeller Street"
+popup/item_4/id = 4
+
+[node name="Label" type="Label" parent="Additional/MusicSelect"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 9.0
+offset_right = 88.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("3_ts0pq")
+text = "SET MUSIC"
 
 [connection signal="pressed" from="Control/VBoxContainer/TimeAttackButton" to="Control/VBoxContainer/TimeAttackButton" method="_on_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/TuneModeButton" to="Control/VBoxContainer/TuneModeButton" method="_on_pressed"]

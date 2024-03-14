@@ -23,7 +23,10 @@ func _on_pressed():
 	get_tree().get_root().get_node("Main").get_node("MainMenu").queue_free()
 	get_tree().get_root().get_node("Main").add_child(map_instance)
 	get_node("/root/GameOption").reset_shader()
-	get_node("/root/GameOption").set_music("boccher")
+	get_node("/root/GameOption").set_music(
+		$"../../../Additional/MusicSelect/MusicOption".get_item_text(
+			$"../../../Additional/MusicSelect/MusicOption".get_selected_id()
+		))
 	map_instance.start()
 	
 func update_tune(car_data, tune_data):
