@@ -96,7 +96,7 @@ float vignette(vec2 uv){
 
 void fragment()
 {
-	vec2 uv = overlay ? warp(SCREEN_UV) : warp(UV); // Warp the uv. uv will be used in most cases instead of UV to keep the warping
+	vec2 uv = warp(SCREEN_UV); // Warp the uv. uv will be used in most cases instead of UV to keep the warping
 	vec2 text_uv = uv;
 	vec2 roll_uv = vec2(0.0);
 	float time = roll ? TIME : 0.0;
