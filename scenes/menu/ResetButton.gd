@@ -16,8 +16,10 @@ func _on_pressed():
 		car.get_node("CarBody").enabled_input = false
 		car.find_child("Stopwatch", true, false).reset()
 		var map = get_tree().get_root().find_child("Akina", true, false)
-		map.finished = false
-		map.start()
+		if not map.started and not map.finished:
+			map.reset_timer()
+		else:
+			map.start()
 		
 	else:
 		get_tree().get_root().find_child("CarBody", true, false).reset_state()

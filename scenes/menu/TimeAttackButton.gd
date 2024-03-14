@@ -14,6 +14,7 @@ func _on_pressed():
 	var car_data = car_instance.get_node("CarBody")
 	var tune_data = get_node("/root/TuneData")
 	update_tune(car_data, tune_data)
+	car_data.is_mouse_and_keyboard = not $"../../../Additional/Gamepad".is_pressed()
 	
 	map_instance.add_child(car_instance)
 	map_instance.gamemode = "TimeAttack"

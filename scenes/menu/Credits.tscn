@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://dckcr2rjih215"]
+
+[ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="1_ngl3a"]
+[ext_resource type="Script" path="res://scenes/menu/BackButtonCredit.gd" id="6_f4rme"]
+[ext_resource type="Texture2D" uid="uid://unu88hgw3vn8" path="res://assets/button/back/BackDefault.png" id="18_txwca"]
+[ext_resource type="Texture2D" uid="uid://c5gfxyg2vm4kq" path="res://assets/button/back/BackPressed.png" id="19_km5uc"]
+[ext_resource type="Texture2D" uid="uid://c44h5o54yg7dq" path="res://assets/button/back/BackHover.png" id="20_4kb3k"]
+[ext_resource type="Texture2D" uid="uid://kyxg56plgclg" path="res://assets/button/back/BackDisabled.png" id="21_us0eq"]
+
+[node name="Credit" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 286.0
+offset_bottom = 130.0
+
+[node name="TextureRect" type="TextureRect" parent="Logo"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 47.0
+offset_right = 778.0
+offset_bottom = 245.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_ngl3a")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -144.0
+offset_bottom = 148.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -208.5
+offset_top = -116.0
+offset_right = 208.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BackButtonCredit" type="TextureButton" parent="BackButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -32.0
+offset_right = 279.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("18_txwca")
+texture_pressed = ExtResource("19_km5uc")
+texture_hover = ExtResource("20_4kb3k")
+texture_disabled = ExtResource("21_us0eq")
+texture_focused = ExtResource("18_txwca")
+stretch_mode = 3
+script = ExtResource("6_f4rme")
+
+[connection signal="pressed" from="BackButton/BackButtonCredit" to="BackButton/BackButtonCredit" method="_on_pressed"]

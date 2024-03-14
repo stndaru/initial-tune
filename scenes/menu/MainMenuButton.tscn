@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dqnx7b6so2hdh"]
+[gd_scene load_steps=19 format=3 uid="uid://dqnx7b6so2hdh"]
 
 [ext_resource type="Texture2D" uid="uid://digtop26qc8a6" path="res://assets/button/play/PlayDefault.png" id="1_8d71h"]
 [ext_resource type="Texture2D" uid="uid://lwji47cv7xmk" path="res://assets/button/play/PlayPressed.png" id="2_g5fkj"]
@@ -11,8 +11,13 @@
 [ext_resource type="Texture2D" uid="uid://q4wn4rwoqcsc" path="res://assets/button/exit/ExitDisabled.png" id="9_8fblf"]
 [ext_resource type="Script" path="res://scenes/menu/ExitButton.gd" id="10_6ky3w"]
 [ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="11_2ojuy"]
+[ext_resource type="Texture2D" uid="uid://beq7dquamgs3w" path="res://assets/button/credits/CreditsDefault.png" id="11_djvce"]
 [ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="12_qnw1x"]
 [ext_resource type="Script" path="res://scenes/menu/VolumeControl.gd" id="12_r4t8p"]
+[ext_resource type="Texture2D" uid="uid://cwxg6733smpa0" path="res://assets/button/credits/CreditsPressed.png" id="12_ufj1v"]
+[ext_resource type="Texture2D" uid="uid://cedlbilv81k7n" path="res://assets/button/credits/CreditsHover.png" id="13_g82dg"]
+[ext_resource type="Texture2D" uid="uid://b1r5uyn1a08we" path="res://assets/button/credits/CreditsDisabled.png" id="14_daxbu"]
+[ext_resource type="Script" path="res://scenes/menu/Credits.gd" id="15_qjwbl"]
 
 [node name="MainMenuButton" type="Control"]
 layout_mode = 3
@@ -39,9 +44,9 @@ grow_vertical = 2
 [node name="PlayButton" type="TextureButton" parent="Control"]
 layout_mode = 0
 offset_left = 71.0
-offset_top = 189.0
+offset_top = 153.0
 offset_right = 622.0
-offset_bottom = 336.0
+offset_bottom = 300.0
 texture_normal = ExtResource("1_8d71h")
 texture_pressed = ExtResource("2_g5fkj")
 texture_hover = ExtResource("3_ao53y")
@@ -53,9 +58,9 @@ script = ExtResource("5_srtsh")
 [node name="ExitButton" type="TextureButton" parent="Control"]
 layout_mode = 0
 offset_left = 193.0
-offset_top = 333.0
+offset_top = 406.0
 offset_right = 568.0
-offset_bottom = 433.0
+offset_bottom = 506.0
 scale = Vector2(0.8, 0.8)
 texture_normal = ExtResource("6_u4w5l")
 texture_pressed = ExtResource("7_l0dra")
@@ -64,6 +69,21 @@ texture_disabled = ExtResource("9_8fblf")
 texture_focused = ExtResource("6_u4w5l")
 stretch_mode = 3
 script = ExtResource("10_6ky3w")
+
+[node name="Credits" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 309.0
+offset_right = 568.0
+offset_bottom = 409.0
+scale = Vector2(0.8, 0.8)
+texture_normal = ExtResource("11_djvce")
+texture_pressed = ExtResource("12_ufj1v")
+texture_hover = ExtResource("13_g82dg")
+texture_disabled = ExtResource("14_daxbu")
+texture_focused = ExtResource("11_djvce")
+stretch_mode = 3
+script = ExtResource("15_qjwbl")
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 0
@@ -128,4 +148,5 @@ text = "0"
 
 [connection signal="pressed" from="Control/PlayButton" to="Control/PlayButton" method="_on_pressed"]
 [connection signal="pressed" from="Control/ExitButton" to="Control/ExitButton" method="_on_pressed"]
+[connection signal="pressed" from="Control/Credits" to="Control/Credits" method="_on_pressed"]
 [connection signal="pressed" from="VolumeControl/SetVolumeButton" to="VolumeControl" method="_on_set_volume_button_pressed"]

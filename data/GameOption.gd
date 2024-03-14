@@ -9,11 +9,13 @@ var rockefeller = 0
 var main_menu = 0
 var main_menu_button = 0
 var race_select = 0
+var credit = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	main_menu = preload("res://scenes/menu/MainMenu.tscn")
 	main_menu_button = preload("res://scenes/menu/MainMenuButton.tscn")
 	race_select = preload("res://scenes/menu/RaceSelect.tscn")
+	credit = preload("res://scenes/menu/Credits.tscn")
 	
 	dragostea = preload("res://assets/music/dragostea.mp3")
 	boccher = preload("res://assets/music/boccherguitarloneliness.mp3")

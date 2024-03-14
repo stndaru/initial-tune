@@ -174,14 +174,12 @@ func get_input():
 				if turn < 0:
 					turn = move_toward(turn, 0, steer_decay+(steer_decay*steering_weight_multiplier)*2)
 				else:
-					turn = move_toward(turn, Input.get_action_strength("ui_right") * steering_angle, \
-										clamp(1 - steering_weight-3, 0.2, 1) * 5)
+					turn = Input.get_action_strength("ui_right") * steering_angle
 			if Input.is_action_pressed("ui_left"):
 				if turn > 0:
 					turn = move_toward(turn, 0, steer_decay+(steer_decay*steering_weight_multiplier)*2)
 				else:
-					turn = move_toward(turn, -Input.get_action_strength("ui_left") * steering_angle, \
-										clamp(1 - steering_weight-3, 0.2, 1) * 5)
+					turn = -Input.get_action_strength("ui_left") * steering_angle
 			steer_angle = clamp(turn, \
 				-steering_angle+(steering_angle*(steering_weight-3)*1.2), \
 				steering_angle-(steering_angle*(steering_weight-3)*1.2))

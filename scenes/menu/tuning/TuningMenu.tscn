@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bn2aaq6mv2gib"]
+[gd_scene load_steps=15 format=3 uid="uid://bn2aaq6mv2gib"]
 
 [ext_resource type="Texture2D" uid="uid://dvu5axf0fnplj" path="res://assets/silver-shimmery-paper-background.jpg" id="1_uyjpm"]
 [ext_resource type="Script" path="res://scenes/menu/tuning/PowerSlider.gd" id="2_fhi5v"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scenes/menu/tuning/SteeringWeightSlider.gd" id="11_hrpj2"]
 [ext_resource type="Script" path="res://scenes/menu/tuning/WeightSlide.gd" id="12_26w34"]
 [ext_resource type="Script" path="res://scenes/menu/tuning/SaveTuneButton.gd" id="12_meqli"]
+[ext_resource type="Script" path="res://scenes/menu/tuning/CopyTuneButton.gd" id="14_8jcp8"]
 
 [node name="TuningMenu" type="Control"]
 layout_mode = 3
@@ -547,9 +548,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -59.0
+offset_left = -9.5
 offset_top = -54.0
-offset_right = 59.0
+offset_right = 108.5
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -557,4 +558,22 @@ theme_override_fonts/font = ExtResource("3_n6hgr")
 text = "SAVE TUNE"
 script = ExtResource("12_meqli")
 
+[node name="CopyTuneButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -111.5
+offset_top = -54.0
+offset_right = -24.5
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_n6hgr")
+text = "COPY"
+script = ExtResource("14_8jcp8")
+
 [connection signal="pressed" from="Control/SaveTuneButton" to="Control/SaveTuneButton" method="_on_pressed"]
+[connection signal="pressed" from="Control/CopyTuneButton" to="Control/CopyTuneButton" method="_on_pressed"]

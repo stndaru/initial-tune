@@ -8,6 +8,7 @@ var timer_screen_instance = 0
 var finish_screen = 0
 var gamemode = "None"
 var finished = false
+var started = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,7 +30,14 @@ func start():
 	if gamemode == "TimeAttack":
 		timer_screen_instance = timer_screen.instantiate()
 		get_node("Car").get_node("GUI").add_child(timer_screen_instance)
+		started = false
+		finished = false
 		$StartTimer.start()
+		
+func reset_timer():
+	timer_screen_instance.queue_free()
+	started = false
+	start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -49,6 +57,7 @@ func _on_finish_line_body_entered(body):
 	if gamemode == "TimeAttack":
 		if body.name == "CarBody":
 			finished = true
+			started = false
 			body.enabled_input = false
 			var finish_screen_instance = finish_screen.instantiate()
 			finish_screen_instance.set_gamemode(gamemode)
@@ -59,3 +68,5 @@ func _on_start_timer_timeout():
 	get_node("Car").get_node("GUI").get_node("Stopwatch").start()
 	get_node("Car").get_node("CarBody").enabled_input = true
 	timer_screen_instance.queue_free()
+	started = true
+	finished = false
