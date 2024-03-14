@@ -1,0 +1,266 @@
+[gd_scene load_steps=14 format=3 uid="uid://b8nchxi21812j"]
+
+[ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="1_chyu6"]
+[ext_resource type="Texture2D" uid="uid://bcbfp2upik3n4" path="res://assets/controls/Throttle.png" id="2_5x3k5"]
+[ext_resource type="Texture2D" uid="uid://unu88hgw3vn8" path="res://assets/button/back/BackDefault.png" id="2_v3smv"]
+[ext_resource type="Texture2D" uid="uid://c5gfxyg2vm4kq" path="res://assets/button/back/BackPressed.png" id="3_h2jqw"]
+[ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_ik442"]
+[ext_resource type="Texture2D" uid="uid://c44h5o54yg7dq" path="res://assets/button/back/BackHover.png" id="4_067ca"]
+[ext_resource type="Texture2D" uid="uid://vkpe25nps142" path="res://assets/controls/Left.png" id="4_iw3b3"]
+[ext_resource type="Texture2D" uid="uid://kyxg56plgclg" path="res://assets/button/back/BackDisabled.png" id="5_c0vg6"]
+[ext_resource type="Texture2D" uid="uid://b5ldj6k3goedn" path="res://assets/controls/Right.png" id="5_rw1eg"]
+[ext_resource type="Texture2D" uid="uid://do1a756loit3e" path="res://assets/controls/Brake.png" id="6_gsmdu"]
+[ext_resource type="Script" path="res://scenes/menu/BackButtonControls.gd" id="6_wmq0a"]
+[ext_resource type="Texture2D" uid="uid://bmt4ukwnfk7d0" path="res://assets/controls/GearUp.png" id="7_ofn7b"]
+[ext_resource type="Texture2D" uid="uid://dyhpsauyyrt4t" path="res://assets/controls/GearDown.png" id="8_2yscu"]
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 286.0
+offset_bottom = 130.0
+
+[node name="TextureRect" type="TextureRect" parent="Logo"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 47.0
+offset_right = 778.0
+offset_bottom = 245.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_chyu6")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -190.0
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Throttle" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -491.0
+offset_top = -156.0
+offset_right = -83.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/Throttle"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_5x3k5")
+
+[node name="Label" type="Label" parent="Control/Throttle"]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 20.0
+offset_right = 396.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_ik442")
+theme_override_font_sizes/font_size = 40
+text = "Throttle"
+
+[node name="Left" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 47.0
+offset_top = -156.0
+offset_right = 455.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/Left"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_iw3b3")
+
+[node name="Label" type="Label" parent="Control/Left"]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 20.0
+offset_right = 396.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_ik442")
+theme_override_font_sizes/font_size = 40
+text = "Turn Left"
+
+[node name="Right" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 47.0
+offset_top = -49.0
+offset_right = 455.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/Right"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_rw1eg")
+
+[node name="Label" type="Label" parent="Control/Right"]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 20.0
+offset_right = 396.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_ik442")
+theme_override_font_sizes/font_size = 40
+text = "Turn Right"
+
+[node name="Brake" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -491.0
+offset_top = -50.0
+offset_right = -83.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/Brake"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_gsmdu")
+
+[node name="Label" type="Label" parent="Control/Brake"]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 20.0
+offset_right = 396.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_ik442")
+theme_override_font_sizes/font_size = 40
+text = "Brake"
+
+[node name="GearUp" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -488.0
+offset_top = 64.0
+offset_right = -49.0
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/GearUp"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("7_ofn7b")
+
+[node name="Label" type="Label" parent="Control/GearUp"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 20.0
+offset_right = 424.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_ik442")
+theme_override_font_sizes/font_size = 40
+text = "Gear Up"
+
+[node name="GearDown" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 48.0
+offset_top = 64.0
+offset_right = 508.0
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/GearDown"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_2yscu")
+
+[node name="Label" type="Label" parent="Control/GearDown"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 20.0
+offset_right = 424.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("3_ik442")
+theme_override_font_sizes/font_size = 40
+text = "Gear Down"
+
+[node name="BackButton" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -208.5
+offset_top = -116.0
+offset_right = 208.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BackButtonControls" type="TextureButton" parent="BackButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -32.0
+offset_right = 279.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("2_v3smv")
+texture_pressed = ExtResource("3_h2jqw")
+texture_hover = ExtResource("4_067ca")
+texture_disabled = ExtResource("5_c0vg6")
+texture_focused = ExtResource("2_v3smv")
+stretch_mode = 3
+script = ExtResource("6_wmq0a")
+
+[connection signal="pressed" from="BackButton/BackButtonControls" to="BackButton/BackButtonControls" method="_on_pressed"]

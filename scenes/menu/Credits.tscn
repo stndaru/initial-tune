@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dckcr2rjih215"]
+[gd_scene load_steps=8 format=3 uid="uid://dckcr2rjih215"]
 
 [ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="1_ngl3a"]
+[ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_i4ug2"]
 [ext_resource type="Script" path="res://scenes/menu/BackButtonCredit.gd" id="6_f4rme"]
 [ext_resource type="Texture2D" uid="uid://unu88hgw3vn8" path="res://assets/button/back/BackDefault.png" id="18_txwca"]
 [ext_resource type="Texture2D" uid="uid://c5gfxyg2vm4kq" path="res://assets/button/back/BackPressed.png" id="19_km5uc"]
@@ -30,16 +31,398 @@ offset_bottom = 245.0
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_ngl3a")
 
-[node name="Control" type="Control" parent="."]
+[node name="Center" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -144.0
-offset_bottom = 148.0
+offset_top = -193.0
+offset_bottom = 197.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AE86" type="Control" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -455.0
+offset_top = 11.0
+offset_right = -65.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Center/AE86"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "[Temporary] AE86: "
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Center/AE86"]
+layout_mode = 0
+offset_left = 199.0
+offset_right = 267.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "AUTOArt"
+uri = "https://autoartmodels.de/model/78799/"
+
+[node name="SilverTexture" type="Control" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -455.0
+offset_top = 45.0
+offset_right = -72.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Center/SilverTexture"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Silver Texture: "
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Center/SilverTexture"]
+layout_mode = 0
+offset_left = 199.0
+offset_right = 267.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Rawpixel at Freepik"
+uri = "https://www.freepik.com/free-photo/silver-shimmery-paper-background_3686894.htm#query=white%20metal&position=14&from_view=keyword&track=ais&uuid=6e90a179-06b3-4569-8bba-34947344d447"
+
+[node name="FontFamily" type="Control" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -455.0
+offset_top = 80.0
+offset_right = -72.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Center/FontFamily"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Font Family: "
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Center/FontFamily"]
+layout_mode = 0
+offset_left = 199.0
+offset_right = 267.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "VCR OSD Mono"
+uri = "https://www.dafont.com/vcr-osd-mono.font"
+
+[node name="CRTShader" type="Control" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -455.0
+offset_top = 118.0
+offset_right = -72.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Center/CRTShader"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "CRT Shader: "
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Center/CRTShader"]
+layout_mode = 0
+offset_left = 199.0
+offset_right = 267.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "pend00 in Godot"
+uri = "https://godotshaders.com/shader/vhs-and-crt-monitor-effect/"
+
+[node name="AkinaMap" type="Control" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -455.0
+offset_top = 153.0
+offset_right = -72.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Center/AkinaMap"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Akina Map: "
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Center/AkinaMap"]
+layout_mode = 0
+offset_left = 199.0
+offset_right = 267.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "antudusun"
+uri = "https://www.racedepartment.com/downloads/akina-2022-yaseone-pass-route-33.53199/"
+
+[node name="Music" type="Control" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 79.0
+offset_top = 11.0
+offset_right = 469.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Center/Music"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Music: "
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Center/Music"]
+layout_mode = 0
+offset_left = 199.0
+offset_right = 267.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Turbo"
+uri = "https://www.youtube.com/@TurboA"
+
+[node name="Speedometer" type="Control" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 79.0
+offset_top = 45.0
+offset_right = 462.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Center/Speedometer"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Speedometer: "
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Center/Speedometer"]
+layout_mode = 0
+offset_left = 199.0
+offset_right = 267.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Baka San"
+uri = "https://gtaforums.com/topic/701830-wipscriv-1983-1987-toyota-corolla-levinsprinter-trueno-ae85ae86/"
+
+[node name="EngineSound" type="Control" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 79.0
+offset_top = 80.0
+offset_right = 462.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Center/EngineSound"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Engine Sound: "
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Center/EngineSound"]
+layout_mode = 0
+offset_left = 199.0
+offset_right = 267.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Japanese Cars TV"
+uri = "https://www.youtube.com/watch?v=BCcAUhsxbnM"
+
+[node name="HeartbeatSFX" type="Control" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 79.0
+offset_top = 118.0
+offset_right = 462.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Center/HeartbeatSFX"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Heartbeat SFX: "
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Center/HeartbeatSFX"]
+layout_mode = 0
+offset_left = 199.0
+offset_right = 267.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "ShidenBeatsMusic"
+uri = "https://pixabay.com/sound-effects/heartbeat-sound-effect-111218/"
+
+[node name="MapBackground" type="Control" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 79.0
+offset_top = 153.0
+offset_right = 462.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Center/MapBackground"]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Map Background: "
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="Center/MapBackground"]
+layout_mode = 0
+offset_left = 199.0
+offset_right = 267.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_i4ug2")
+text = "Google Earth"
+uri = "https://earth.google.com/web/"
+
+[node name="Creator" type="Label" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.5
+offset_top = -188.0
+offset_right = 212.5
+offset_bottom = -159.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_i4ug2")
+theme_override_font_sizes/font_size = 32
+text = "Game Created by: Valinx"
+horizontal_alignment = 1
+
+[node name="Purpose" type="Label" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -249.0
+offset_top = -129.0
+offset_right = 237.0
+offset_bottom = -113.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_i4ug2")
+theme_override_font_sizes/font_size = 18
+text = "Original Purpose for Fasilkom UI Game Jam 2024"
+horizontal_alignment = 1
+
+[node name="Inspiration" type="Label" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -328.0
+offset_top = -105.0
+offset_right = 316.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_i4ug2")
+theme_override_font_sizes/font_size = 18
+text = "Inspired by Initial D"
+horizontal_alignment = 1
+
+[node name="Playtesters" type="Label" parent="Center"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -328.0
+offset_top = -69.0
+offset_right = 316.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_i4ug2")
+theme_override_font_sizes/font_size = 24
+text = "Playtesters: KambingCompany and Chamikey"
+horizontal_alignment = 1
 
 [node name="BackButton" type="Control" parent="."]
 layout_mode = 1
