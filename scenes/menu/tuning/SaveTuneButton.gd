@@ -3,7 +3,7 @@ extends Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_focus_mode(0)
+	set_focus_mode(FOCUS_NONE)
 
 func _on_pressed():
 	update_tune_data()

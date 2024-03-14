@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bopov2612gay6"]
+[gd_scene load_steps=26 format=3 uid="uid://bopov2612gay6"]
 
 [ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="1_ilpcs"]
 [ext_resource type="Texture2D" uid="uid://coyij5td4nppd" path="res://assets/akinamap.png" id="2_q6y82"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://73pbeyb0dcoc" path="res://assets/button/timeattack/TimeAttackPressed.png" id="14_e6jpt"]
 [ext_resource type="Texture2D" uid="uid://bliirryk26xgy" path="res://assets/button/timeattack/TimeAttackHover.png" id="15_2hdg5"]
 [ext_resource type="Texture2D" uid="uid://bpfjqyif0bktp" path="res://assets/button/timeattack/TimeAttackDisabled.png" id="16_arw8o"]
+[ext_resource type="Script" path="res://scenes/menu/ResetTuneButton.gd" id="18_pw5o7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tkf47"]
 
@@ -144,6 +145,7 @@ texture_pressed = ExtResource("6_x6tf0")
 texture_hover = ExtResource("7_gyk0b")
 texture_disabled = ExtResource("8_y8e33")
 texture_focused = ExtResource("5_srbyw")
+script = ExtResource("18_pw5o7")
 
 [node name="BackButton" type="Control" parent="."]
 layout_mode = 1
