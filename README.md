@@ -47,17 +47,17 @@ Right - `./Right Arrow`
 
 ## Tuning Information
 Some few information regarding the tuning if you're not familiar:
-#### POWER
+#### POWER - Engine Power
 The engine power of the car, where higher value means higher power and the faster the car will go
-#### FDR
+#### FDR - Final Drive Ratio
 The Final Drive Ratio of the car gearing system. Lowering the value will affect all gears, where it gives a higher top speed for each gear, but lower acceleration.
-#### GR
+#### GR - Gear Ratio
 The gear ratio for the car transmission, set for each gear from 1 to 5. Lowering the value will provide lower acceleration, but a higher top speed for each gear. You can read more about it in [LearnDriving Website](https://learndriving.tips/learning-to-drive/how-to-change-gear-in-manual-car/learning-car-gears-faq/car-gear-ratios-explained/).
-#### BRK
+#### BRK - Brake Power
 The brake power of the car. Lower value (higher negative number) means a more powerful braking power.
-#### STR
+#### STR - Steering Weight
 The steering weight of the car's handling. Lower value means lower height, and higher turning manueverability. Lower this if you experience strong understeering when entering a corner.
-#### WGT
+#### WGT - Car Weight
 The total weight of the car. Lower value means lighter weight, and results in a faster acceleration.
 
 > ProTip - You can get a rough feeling for gear tuning through the [Motoristo](https://motoristo.com/tools/vehicle-speed-calculator?wheelSizeIn=16&tyreWidthMm=225&tyreHeightRatio=45&rpmMax=7000&finalDrive=3&gears=3.3%2C2.25%2C1.75%2C1%2C0.85%2C0.8) website
