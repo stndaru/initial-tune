@@ -2,6 +2,7 @@ extends Control
 
 var counting = false
 var elapsed_time = 0
+var half_time = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -9,7 +10,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if counting:
-		elapsed_time += delta
+		# Cheat Code - Task 2
+		if half_time:
+			elapsed_time += (delta/2)
+			print(delta/2)
+		else:
+			elapsed_time += delta
 		$Time.text = str(elapsed_time).pad_decimals(2)
 		
 func reset():
@@ -22,3 +28,7 @@ func stop():
 	
 func start():
 	counting = true
+
+func toggle_halftime():
+	half_time = !half_time
+	print(half_time)

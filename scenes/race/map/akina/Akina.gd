@@ -10,6 +10,10 @@ var gamemode = "None"
 var finished = false
 var started = false
 
+# Cheatcode - Should only be 5 character long
+var buffer = "ABCDE"
+var zawarudo = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	InputMap.action_set_deadzone("ui_up", 0.1) 
@@ -52,6 +56,27 @@ func _input(event):
 			get_node("Car").get_node("GUI").add_child(pause_menu_instance)
 		else:
 			get_tree().paused = false
+			
+	# Cheat Code - Task 2
+	if event is InputEventKey and event.is_pressed():
+		buffer = buffer.substr(1) + event.as_text_keycode()[0]
+		
+		# Stops Time
+		if buffer.to_upper() == "ZAWRD" and gamemode == "TimeAttack":
+			if not zawarudo:
+				get_node("Car").get_node("GUI").get_node("Stopwatch").stop()
+			else:
+				get_node("Car").get_node("GUI").get_node("Stopwatch").start()
+			zawarudo = !zawarudo
+		
+		# Halven the Time Taken
+		if buffer.to_upper() == "HTEZZ" and gamemode == "TimeAttack":
+			get_node("Car").get_node("GUI").get_node("Stopwatch").toggle_halftime()
+		
+		# Remove COllision
+		if buffer.to_upper() == "FREEC":
+			get_node("Car").get_node("CarBody").get_node("CarCollision").disabled = !get_node("Car").get_node("CarBody").get_node("CarCollision").disabled
+		
 	
 func _on_finish_line_body_entered(body):
 	if gamemode == "TimeAttack":
