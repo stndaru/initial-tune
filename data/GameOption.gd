@@ -8,6 +8,11 @@ var rockefeller = 0
 
 var main_menu = 0
 var main_menu_button = 0
+
+var splashscreen_namelogo = 0
+var splashscreen_unilogo = 0
+var splashscreen_attribution = 0
+
 var race_select = 0
 var credit = 0
 var control = 0
@@ -15,6 +20,10 @@ var control = 0
 func _ready():
 	main_menu = preload("res://scenes/menu/MainMenu.tscn")
 	main_menu_button = preload("res://scenes/menu/MainMenuButton.tscn")
+	splashscreen_namelogo = preload("res://scenes/menu/splashscreens/LogoName.tscn")
+	splashscreen_unilogo = preload("res://scenes/menu/splashscreens/UniLogo.tscn")
+	splashscreen_attribution = preload("res://scenes/menu/splashscreens/Attribution.tscn")
+	
 	race_select = preload("res://scenes/menu/RaceSelect.tscn")
 	credit = preload("res://scenes/menu/Credits.tscn")
 	control = preload("res://scenes/menu/Controls.tscn")
