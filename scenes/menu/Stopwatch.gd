@@ -13,7 +13,6 @@ func _process(delta):
 		# Cheat Code - Task 2
 		if half_time:
 			elapsed_time += (delta/2)
-			print(delta/2)
 		else:
 			elapsed_time += delta
 		$Time.text = str(elapsed_time).pad_decimals(2)
@@ -31,4 +30,3 @@ func start():
 
 func toggle_halftime():
 	half_time = !half_time
-	print(half_time)
